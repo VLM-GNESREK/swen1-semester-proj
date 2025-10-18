@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "nlfo2Mms4WM=",
+  "dgSpecHash": "c1A7ky5sBa8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
+  ],
   "logs": []
 }

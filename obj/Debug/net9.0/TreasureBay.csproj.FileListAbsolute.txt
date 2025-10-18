@@ -40,3 +40,7 @@ C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - W
 C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.pdb
 C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.genruntimeconfig.cache
 C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\ref\TreasureBay.dll
+C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.sourcelink.json
+C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.csproj.AssemblyReference.cache
+C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\Treasure.ABD31BE0.Up2Date
