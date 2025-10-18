@@ -1,5 +1,6 @@
 ﻿// Program.cs
 
+using Treasure_Bay.Controllers;
 using Treasure_Bay.Classes;
 using System.Threading;
 using System.Net;
@@ -9,17 +10,13 @@ using Newtonsoft.Json;
 
 class Program
 {
-    public class UserLoginRequest
-    {
-        public string? Username { get; set; }
-        public string? Password { get; set; }
-    }
     static async Task Main(string[] args)
     {
         HttpListener origin = new HttpListener();
         origin.Prefixes.Add("http://localhost:8080/");
         origin.Start();
         System.Console.WriteLine("Started Server. Listening at port 8080.");
+        var userController = new UserController();
         while (true)
         {
             var res = await origin.GetContextAsync();
@@ -31,45 +28,44 @@ class Program
                 var path = req.Url?.AbsolutePath ?? "/";
                 System.Console.WriteLine($"Received {type} request for {path}"); // Debug
                 var body = $"Shiny String";
-                string requestBody = "";
 
                 switch(path) // Routing Switch
                 {
                     case "/test":
                         resp.StatusCode = 200;
                         body = $"This is the {path} page.";
+                        var bytes = Encoding.UTF8.GetBytes(body);
+                        resp.ContentType = "text/plain; charset=utf-8";
+                        resp.ContentLength64 = bytes.Length;
+                        await resp.OutputStream.WriteAsync(bytes, 0, bytes.Length);
+                        resp.Close();
                         break;
                     case "/hello":
                         resp.StatusCode = 200;
                         body = "Hello World!";
-                        break;
-                    case "/api/users/login":
-                        using (var reader = new StreamReader(req.InputStream, req.ContentEncoding))
-                        {
-                            requestBody = await reader.ReadToEndAsync();
-                        }
-                        var loginData = JsonConvert.DeserializeObject<UserLoginRequest>(requestBody);
-                        if (loginData == null || string.IsNullOrWhiteSpace(loginData.Username) || string.IsNullOrWhiteSpace(loginData.Password))
-                        {
-                            resp.StatusCode = 400;
-                            body = $"Error 400: Username or password missing or malformed.";
-                        }
-                        else
-                        {
-                            resp.StatusCode = 200;
-                            body = $"Login attempt for user: {loginData.Username} with password: {loginData.Password}";
-                        }
+                        var bytes2 = Encoding.UTF8.GetBytes(body);
+                        resp.ContentType = "text/plain; charset=utf-8";
+                        resp.ContentLength64 = bytes2.Length;
+                        await resp.OutputStream.WriteAsync(bytes2, 0, bytes2.Length);
+                        resp.Close();
                         break;
                     default:
-                        resp.StatusCode = 404;
-                        body = "Error 404: Page not found";
+                        if (path.StartsWith("/api/users"))
+                        {
+                            await userController.HandleRequest(req, resp);
+                        }
+                        else
+                        {   
+                            resp.StatusCode = 404;
+                            body = "Error 404: Page not found";
+                            var bytes3 = Encoding.UTF8.GetBytes(body);
+                            resp.ContentType = "text/plain; charset=utf-8";
+                            resp.ContentLength64 = bytes3.Length;
+                            await resp.OutputStream.WriteAsync(bytes3, 0, bytes3.Length);
+                            resp.Close();
+                        }
                         break;
                 }
-                var bytes = Encoding.UTF8.GetBytes(body);
-                resp.ContentType = "text/plain; charset=utf-8";
-                resp.ContentLength64 = bytes.Length;
-                await resp.OutputStream.WriteAsync(bytes, 0, bytes.Length);
-                resp.Close();
             });
         }
         // Legacy Code from first Class Presentation to demonstrate OOP functionalities, pay no heed.
