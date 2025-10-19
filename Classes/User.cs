@@ -27,7 +27,7 @@ namespace Treasure_Bay.Classes
             this.Favourites = []; // ref MediaEntry.cs; List of MediaEntry Objects
         }
 
-        // Rating 
+        // To be moved over to MediaController later:TM:
 
         public void PostRating(MediaEntry media, int stars, string comment)
         {

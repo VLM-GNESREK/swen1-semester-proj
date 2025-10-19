@@ -66,7 +66,74 @@ namespace Treasure_Bay.Controllers
                     }
                     break;
                 default:
-                    await SendResponseAsync(resp, $"Error 404: Media Endpoint not found.", 404);
+                    if (path.StartsWith("/api/media/"))
+                    {
+                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
+                        if (int.TryParse(idSegment, out int mediaID))
+                        {
+                            var media = mediaDatabse.FirstOrDefault(m => m.MediaID == mediaID);
+
+                            if (media == null)
+                            {
+                                await SendResponseAsync(resp, $"Error 404: Media could not be found.", 404);
+                                break;
+                            }
+
+                            switch (method)
+                            {
+                                case "GET":
+                                    string jsonResponse = JsonConvert.SerializeObject(media);
+                                    await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
+                                    break;
+                                case "DELETE":
+                                    if (media.Creator.UserID != user.UserID)
+                                    {
+                                        await SendResponseAsync(resp, $"Error 403: You are not authorised to delete another user's media.", 403);
+                                    }
+                                    else
+                                    {
+                                        mediaDatabse.Remove(media);
+                                        await SendResponseAsync(resp, "", 204);
+                                    }
+                                    break;
+                                case "PUT":
+                                    if (media.Creator.UserID != user.UserID)
+                                    {
+                                        await SendResponseAsync(resp, $"Error 403: You are not authorised to alter another user's media.", 403);
+                                    }
+
+                                    using (var reader = new StreamReader(req.InputStream, req.ContentEncoding))
+                                    {
+                                        requestBody = await reader.ReadToEndAsync();
+                                    }
+                                    var mediaData = JsonConvert.DeserializeObject<MediaCreateRequest>(requestBody);
+
+                                    if (mediaData == null || string.IsNullOrWhiteSpace(mediaData.Title))
+                                    {
+                                        await SendResponseAsync(resp, $"Error 400: Title is required.", 400);
+                                        break;
+                                    }
+
+                                    media.Title = mediaData.Title;
+                                    media.Description = mediaData.Description ?? media.Description;
+                                    media.ReleaseYear = mediaData.ReleaseYear;
+                                    string updatedJsonResponse = JsonConvert.SerializeObject(media);
+                                    await SendResponseAsync(resp, updatedJsonResponse, 200, "application/json; charset=utf-8");
+                                    break;
+                                default:
+                                    await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            await SendResponseAsync(resp, $"Error 400: Invlid media ID.", 400);
+                        }
+                    }
+                    else
+                    {
+                        await SendResponseAsync(resp, $"Error 404: Media endpoint not found.", 404);
+                    }
                     break;
             }
         }

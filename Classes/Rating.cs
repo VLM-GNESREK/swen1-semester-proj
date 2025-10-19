@@ -33,14 +33,12 @@ namespace Treasure_Bay.Classes
             this.ComVis = false;            // Comment Visibility, moderation says Spec, not sure what they mean <-<
         }
 
-        // Confirmation (Comment)
+        // All of this will be moved over to Controllers eventually:TM:
 
         public void ConfirmComment()
         {
             this.ComVis = true;
         }
-
-        // likes
 
         public void AddLike()
         {
