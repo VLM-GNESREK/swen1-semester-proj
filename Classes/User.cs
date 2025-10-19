@@ -27,19 +27,6 @@ namespace Treasure_Bay.Classes
             this.Favourites = []; // ref MediaEntry.cs; List of MediaEntry Objects
         }
 
-        // Authentication
-
-        public void Register(string username, string password)
-        {
-            // hashy bits go here (later)
-        }
-
-        public bool Login(string username, string password)
-        {
-            // compare to hashy bits above
-            return false;
-        }
-
         // Rating 
 
         public void PostRating(MediaEntry media, int stars, string comment)

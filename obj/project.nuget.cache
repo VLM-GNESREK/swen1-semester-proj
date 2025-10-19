@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "c1A7ky5sBa8=",
+  "dgSpecHash": "ZhpMlNI3CjU=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512"
   ],
   "logs": []

@@ -40,15 +40,6 @@ class Program
                         await resp.OutputStream.WriteAsync(bytes, 0, bytes.Length);
                         resp.Close();
                         break;
-                    case "/hello":
-                        resp.StatusCode = 200;
-                        body = "Hello World!";
-                        var bytes2 = Encoding.UTF8.GetBytes(body);
-                        resp.ContentType = "text/plain; charset=utf-8";
-                        resp.ContentLength64 = bytes2.Length;
-                        await resp.OutputStream.WriteAsync(bytes2, 0, bytes2.Length);
-                        resp.Close();
-                        break;
                     default:
                         if (path.StartsWith("/api/users"))
                         {
