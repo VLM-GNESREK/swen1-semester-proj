@@ -55,7 +55,7 @@ namespace Treasure_Bay.Controllers
                         string jsonResponse = JsonConvert.SerializeObject(newMedia);
                         await SendResponseAsync(resp, jsonResponse, 201, "application/json; charset=utf-8");
                     }
-                    else if (method == "GET")
+                    else if (method == "GET") // Reading
                     {
                         string jsonResponse = JsonConvert.SerializeObject(mediaDatabse);
                         await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
@@ -85,7 +85,7 @@ namespace Treasure_Bay.Controllers
                                     string jsonResponse = JsonConvert.SerializeObject(media);
                                     await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
                                     break;
-                                case "DELETE":
+                                case "DELETE": // Deletion
                                     if (media.Creator.UserID != user.UserID)
                                     {
                                         await SendResponseAsync(resp, $"Error 403: You are not authorised to delete another user's media.", 403);
@@ -96,7 +96,7 @@ namespace Treasure_Bay.Controllers
                                         await SendResponseAsync(resp, "", 204);
                                     }
                                     break;
-                                case "PUT":
+                                case "PUT": // Updating
                                     if (media.Creator.UserID != user.UserID)
                                     {
                                         await SendResponseAsync(resp, $"Error 403: You are not authorised to alter another user's media.", 403);

@@ -92,7 +92,7 @@ namespace Treasure_Bay.Controllers
                             }
                             break;
                         default:
-                            await SendResponseAsync(resp, $"Error 405: Method not allowed!", 405);
+                            await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
                             break;
                     }
                     break;
@@ -102,7 +102,7 @@ namespace Treasure_Bay.Controllers
                         User? user = Authenticate(req);
                         if (user == null)
                         {
-                            await SendResponseAsync(resp, $"Error 401: Unauthorised. Missing or invalid token", 401);
+                            await SendResponseAsync(resp, $"Error 401: Unauthorised. Missing or invalid token.", 401);
                         }
                         else
                         {

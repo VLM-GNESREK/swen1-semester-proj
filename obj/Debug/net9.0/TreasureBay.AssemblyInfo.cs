@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TreasureBay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ddd0157155ae778e964a431e17ec09b39951532")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8cdd18beac3360e0974f752d12467a01f01d6308")]
 [assembly: System.Reflection.AssemblyProductAttribute("TreasureBay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TreasureBay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

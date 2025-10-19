@@ -1,0 +1,876 @@
+{
+	"info": {
+		"_postman_id": "c5d31087-7417-475a-abdf-6f2dc8da6814",
+		"name": "MRP Test Collection",
+		"description": "First perform the tests in the root folder. Then proceed with tests in the UserController folder. Lastly do the tests in the MediaController folder.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49375833",
+		"_collection_link": "https://vlm-gnesrek-1596437.postman.co/workspace/5e94f78d-43eb-407f-808c-e83e68bc5c27/collection/49375833-c5d31087-7417-475a-abdf-6f2dc8da6814?action=share&source=collection_link&creator=49375833"
+	},
+	"item": [
+		{
+			"name": "UserController Tests",
+			"item": [
+				{
+					"name": "[U1] Register User 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Sadie de Aflor\",\r\n    \"Password\": \"Aredhel13ABY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] Register User 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Noire Dante Xion\",\r\n    \"Password\": \"Brintwoo213ABY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Bad Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Noire Dante Xion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Disallowed Method Register",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Same Register Attempt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Noire Dante Xion\",\r\n    \"Password\": \"TheSunIsFlat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Sadie de Aflor\",\r\n    \"Password\": \"Aredhel13ABY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Noire Dante Xion\",\r\n    \"Password\": \"Brintwoo213ABY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Bad Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Sadie de Aflor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Wrong Password Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Username\": \"Sadie de Aflor\",\r\n    \"Password\": \"NotMyPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Disallowed Method Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Auth-Check",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/profile",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Non-Token Auth-Check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/profile",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Disallowed Method Auth-Check",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/profile",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Unknown User API Endpoint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/fun",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"fun"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This Folder includes all the tests for the UserController class. It is advised to perform them all sequentially after the tests in the root folder have been performed."
+		},
+		{
+			"name": "MediaController Tests",
+			"item": [
+				{
+					"name": "[U1] Media Creation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"Tale of Dark Starlit Nights\",\r\n    \"Description\": \"A beautiful ballad over a young maiden who wanders through a world hulled in perpetual darkness under a starry sky.\",\r\n    \"ReleaseYear\": 2025\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/media",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Bad Media Creation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"IForgotTheDescriptionOhNo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/media",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] All Media Read",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Disallowed Method All Media",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Non-Existent Media Lookup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/99",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] Media Lookup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Unauthorised Deletion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Unauthorised Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"The Moonwitch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Media Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"The Moonmaiden\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Disallowed Method Media",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Media Deletion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Invalid Media ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/media/fun",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media",
+								"fun"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "[F] Unauthorised Deletion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Noire Dante Xion-mrpToken",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/media/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"media",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[S] Test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Sadie de Aflor-mrpToken",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/test",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[F] Unknown Page",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Sadie de Aflor-mrpToken",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/fun",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"fun"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
