@@ -19,7 +19,7 @@ namespace Treasure_Bay.Classes
         public string Description { get; set; }
         public int ReleaseYear { get; set; }
         public int AgeRestriction { get; set; }
-        // Shiny types (props)
+        // Shiny types (collections)
         public User Creator { get; private set; }
         public List<Rating> Ratings { get; private set; }
         public List<string> Genres { get; set; }
@@ -39,18 +39,16 @@ namespace Treasure_Bay.Classes
             this.Ratings = new List<Rating>();
         }
 
-        // Rating Stuff
+        // Stuff I will be moving over to MediaController.cs later on:tm:
 
         public void AddRating(Rating rating)
         {
             this.Ratings.Add(rating);
         }
 
-        // Genre Stuff
-
         public void AddGenre(string genre)
         {
-            if (!string.IsNullOrWhiteSpace(genre) && !this.Genres.Contains(genre)) // Checks if genre submitted is Null or Empty, and also other misc. chars e.g. \n \r etc. (Very handy)
+            if (!string.IsNullOrWhiteSpace(genre) && !this.Genres.Contains(genre)) 
             {
                 this.Genres.Add(genre);
             }

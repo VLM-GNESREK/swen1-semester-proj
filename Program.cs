@@ -17,6 +17,7 @@ class Program
         origin.Start();
         System.Console.WriteLine("Started Server. Listening at port 8080.");
         var userController = new UserController();
+        var mediaController = new MediaController();
         while (true)
         {
             var res = await origin.GetContextAsync();
@@ -40,13 +41,17 @@ class Program
                         await resp.OutputStream.WriteAsync(bytes, 0, bytes.Length);
                         resp.Close();
                         break;
-                    default:
+                    default: // Wanted to have the API endpoints be in switch case of the form case path.StartsWith("/api/users") but it wouldn't let me so that's why there's a clunky default if else chain there now
                         if (path.StartsWith("/api/users"))
                         {
                             await userController.HandleRequest(req, resp);
                         }
+                        else if(path.StartsWith("/api/media"))
+                        {
+                            await mediaController.HandleRequest(req, resp);
+                        }
                         else
-                        {   
+                        {
                             resp.StatusCode = 404;
                             body = "Error 404: Page not found";
                             var bytes3 = Encoding.UTF8.GetBytes(body);
