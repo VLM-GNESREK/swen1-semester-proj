@@ -5,6 +5,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using BCrypt.Net;
 using Treasure_Bay.Classes;
+using Treasure_Bay.DTO;
+using Treasure_Bay.Services;
 
 namespace Treasure_Bay.Controllers
 {
@@ -16,10 +18,16 @@ namespace Treasure_Bay.Controllers
     }
     public class UserController : BaseController
     {
-        // ## COLLECTIONS ##
-        private static List<User> userDatabase = new List<User>();
+
+        private readonly UserService _userService;
 
         // ## METHODS ##
+
+        public UserController(UserService userService)
+        {
+            _userService = userService;
+        }
+
         public async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
         {
             var method = req.HttpMethod;
@@ -42,8 +50,8 @@ namespace Treasure_Bay.Controllers
                             }
                             else
                             {
-                                var user = userDatabase.FirstOrDefault(u => u.Username == loginData.Username);
-                                if (user == null || !BCrypt.Net.BCrypt.Verify(loginData.Password, user.PasswordHash))
+                                var user = _userService.Login(loginData.Username, loginData.Password);
+                                if (user == null)
                                 {
                                     await SendResponseAsync(resp, $"Error 401: Invalid username or password.", 401);
                                 }
@@ -75,18 +83,14 @@ namespace Treasure_Bay.Controllers
                             }
                             else
                             {
-                                if (userDatabase.Any(u => u.Username == loginData.Username))
+                                if (_userService.QueryExists(loginData.Username))
                                 {
                                     await SendResponseAsync(resp, $"Error 409: User with this username already exists.", 409);
                                 }
                                 else
                                 {
-                                    int newID = userDatabase.Any() ? userDatabase.Max(u => u.UserID) + 1 : 1;
-                                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(loginData.Password);
-                                    User newUser = new User(loginData.Username, newID, hashedPassword);
-                                    userDatabase.Add(newUser);
-
-                                    string jsonResponse = JsonConvert.SerializeObject(newUser);
+                                    UserResponseDTO userResponse = _userService.Register(loginData.Username, loginData.Password);
+                                    string jsonResponse = JsonConvert.SerializeObject(userResponse);
                                     await SendResponseAsync(resp, jsonResponse, 201, "application/json; charset=utf-8");
                                 }
                             }

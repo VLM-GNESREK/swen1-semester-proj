@@ -26,6 +26,8 @@ public class HttpServer
         _listener.Prefixes.Add(url);
     }
 
+    // Server Initialisation
+
     public async Task Start()
     {
         _listener.Start();

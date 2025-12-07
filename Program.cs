@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json;
+using Treasure_Bay.Services;
 
 class Program
 {
@@ -13,7 +14,8 @@ class Program
     {
         DataBaseSetup.InitialiseDatabase();
         string serverURL = "http://localhost:8080/";
-        UserController userController = new UserController();
+        UserService userService = new UserService();
+        UserController userController = new UserController(userService);
         MediaController mediaController = new MediaController();
         HttpServer origin = new HttpServer(serverURL, userController, mediaController);
         await origin.Start();
