@@ -18,7 +18,7 @@ namespace Treasure_Bay.Classes
         public User Reviewer { get; private set; }
         public MediaEntry Media { get; private set; }
 
-        // ## PROPERTIES ##
+        // ## METHODS ##
         // Constructor
 
         public Rating(int ratingID, User reviewer, MediaEntry media, int starValue, string comment)
