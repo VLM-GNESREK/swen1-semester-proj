@@ -30,7 +30,7 @@ namespace Treasure_Bay.Controllers
             await resp.OutputStream.WriteAsync(bytes, 0, bytes.Length);
             resp.Close();
         }
-        
+
         protected User? Authenticate(HttpListenerRequest req)
         {
             string? authHeader = req.Headers["Authorization"];
@@ -40,6 +40,11 @@ namespace Treasure_Bay.Controllers
             }
             string token = authHeader.Substring(7);
             return _authService.GetUserByToken(token);
+        }
+
+        public virtual async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
+        {
+            await SendResponseAsync(resp, "Error 404: Responsible Controller not found.", 404);
         }
     }
 }

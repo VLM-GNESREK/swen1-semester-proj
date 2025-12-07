@@ -24,12 +24,9 @@ namespace Treasure_Bay.Controllers
 
         // ## METHODS ##
 
-        public MediaController(AuthService authService) : base(authService)
-        {
-            
-        }
+        public MediaController(AuthService authService) : base(authService) {}
 
-        public async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
+        public override async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
         {
             User? user = Authenticate(req);
 

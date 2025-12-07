@@ -45,4 +45,7 @@ The `static` keyword ensures that there is only one instance of each collection,
 |Media Management (CRUD) Endpoints|2,5|
 |Postman Testing & Debugging|2,0|
 |Documentation (Protocol & README)<br>(I had to make it fancy)|1,5|
-|**Total**|18,5|
+|Refactoring 1: Controller Pattern|2,0|
+|Refactoring 2: Service Layer, DTOs & DI|2,5|
+|Refactoring 3: Dictionary Routing|1,0|
+|**Total**|24|

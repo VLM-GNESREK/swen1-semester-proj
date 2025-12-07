@@ -28,7 +28,7 @@ namespace Treasure_Bay.Controllers
             _userService = userService;
         }
 
-        public async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
+        public override async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
         {
             var method = req.HttpMethod;
             var path = req.Url?.AbsolutePath ?? "/";
