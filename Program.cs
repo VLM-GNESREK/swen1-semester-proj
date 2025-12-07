@@ -15,8 +15,9 @@ class Program
         DataBaseSetup.InitialiseDatabase();
         string serverURL = "http://localhost:8080/";
         UserService userService = new UserService();
-        UserController userController = new UserController(userService);
-        MediaController mediaController = new MediaController();
+        AuthService authService = new AuthService();
+        UserController userController = new UserController(userService, authService);
+        MediaController mediaController = new MediaController(authService);
         HttpServer origin = new HttpServer(serverURL, userController, mediaController);
         await origin.Start();
     }

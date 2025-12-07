@@ -5,6 +5,7 @@ using System.Net;
 using System.Linq;
 using Newtonsoft.Json;
 using Treasure_Bay.Classes;
+using Treasure_Bay.Services;
 
 namespace Treasure_Bay.Controllers
 {
@@ -16,7 +17,18 @@ namespace Treasure_Bay.Controllers
     }
     public class MediaController : BaseController
     {
+
+        // ## COLLECTIONS ##
+
         private static List<MediaEntry> mediaDatabse = new List<MediaEntry>();
+
+        // ## METHODS ##
+
+        public MediaController(AuthService authService) : base(authService)
+        {
+            
+        }
+
         public async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
         {
             User? user = Authenticate(req);

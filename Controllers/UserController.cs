@@ -23,7 +23,7 @@ namespace Treasure_Bay.Controllers
 
         // ## METHODS ##
 
-        public UserController(UserService userService)
+        public UserController(UserService userService, AuthService authService) : base(authService)
         {
             _userService = userService;
         }
@@ -57,8 +57,7 @@ namespace Treasure_Bay.Controllers
                                 }
                                 else
                                 {
-                                    string token = $"{user.Username}-mrpToken";
-                                    tokenDatabase[token] = user;
+                                    string token = _authService.GenerateToken(user);
                                     await SendResponseAsync(resp, token, 200);
                                 }
                             }
