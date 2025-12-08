@@ -82,7 +82,7 @@ namespace Treasure_Bay.Controllers
                             }
                             else
                             {
-                                if (_userService.QueryExists(loginData.Username))
+                                if (_userService.QueryUserExists(loginData.Username))
                                 {
                                     await SendResponseAsync(resp, $"Error 409: User with this username already exists.", 409);
                                 }
