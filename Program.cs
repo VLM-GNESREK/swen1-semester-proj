@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json;
 using Treasure_Bay.Services;
+using Treasure_Bay.Repositories;
 
 class Program
 {
@@ -14,9 +15,11 @@ class Program
     {
         DataBaseSetup.InitialiseDatabase();
         string serverURL = "http://localhost:8080/";
-        UserService userService = new UserService();
+        IUserRepository userRepository = new UserRepository();
+        IMediaRepository mediaRepository = new MediaRepository();
+        UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService();
-        MediaService mediaService = new MediaService();
+        MediaService mediaService = new MediaService(mediaRepository);
         UserController userController = new UserController(userService, authService);
         MediaController mediaController = new MediaController(mediaService, authService);
         HttpServer origin = new HttpServer(serverURL, userController, mediaController);
