@@ -16,8 +16,9 @@ class Program
         string serverURL = "http://localhost:8080/";
         UserService userService = new UserService();
         AuthService authService = new AuthService();
+        MediaService mediaService = new MediaService();
         UserController userController = new UserController(userService, authService);
-        MediaController mediaController = new MediaController(authService);
+        MediaController mediaController = new MediaController(mediaService, authService);
         HttpServer origin = new HttpServer(serverURL, userController, mediaController);
         await origin.Start();
     }

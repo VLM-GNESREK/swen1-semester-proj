@@ -1,3 +1,5 @@
+// DataBaseSetup.cs
+
 using System.Data.SqlTypes;
 using Npgsql;
 
@@ -21,7 +23,23 @@ public class DataBaseSetup
                     );
             ";
 
-            using (var cmd = new NpgsqlCommand(sql, conn))
+            using(var cmd = new NpgsqlCommand(sql, conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+
+            sql = @"
+                CREATE TABLE IF NOT EXISTS media
+                (
+                    media_id SERIAL PRIMARY KEY,
+                    title TEXT NOT NULL,
+                    description TEXT,
+                    release_year INTEGER,
+                    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE
+                );
+            ";
+
+            using(var cmd = new NpgsqlCommand(sql, conn))
             {
                 cmd.ExecuteNonQuery();
             }

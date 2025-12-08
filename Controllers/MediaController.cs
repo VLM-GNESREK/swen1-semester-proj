@@ -18,13 +18,16 @@ namespace Treasure_Bay.Controllers
     public class MediaController : BaseController
     {
 
-        // ## COLLECTIONS ##
+        // ## VARIABLES ##
 
-        private static List<MediaEntry> mediaDatabse = new List<MediaEntry>();
+        private MediaService _mediaService;
 
         // ## METHODS ##
 
-        public MediaController(AuthService authService) : base(authService) {}
+        public MediaController(MediaService mediaService, AuthService authService) : base(authService)
+        {
+            _mediaService = mediaService;
+        }
 
         public override async Task HandleRequest(HttpListenerRequest req, HttpListenerResponse resp)
         {
@@ -58,15 +61,13 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
-                        int newID = mediaDatabse.Any() ? mediaDatabse.Max(m => m.MediaID) + 1 : 1;
-                        MediaEntry newMedia = new MediaEntry(newID, mediaData.Title, mediaData.Description, mediaData.ReleaseYear, user);
-                        mediaDatabse.Add(newMedia);
+                        var newMedia = _mediaService.CreateMedia(mediaData.Title, mediaData.Description, mediaData.ReleaseYear, user);
                         string jsonResponse = JsonConvert.SerializeObject(newMedia);
                         await SendResponseAsync(resp, jsonResponse, 201, "application/json; charset=utf-8");
                     }
                     else if (method == "GET") // Reading
                     {
-                        string jsonResponse = JsonConvert.SerializeObject(mediaDatabse);
+                        string jsonResponse = JsonConvert.SerializeObject(_mediaService.GetAllMedia());
                         await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
                     }
                     else
@@ -80,7 +81,7 @@ namespace Treasure_Bay.Controllers
                         string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
                         if (int.TryParse(idSegment, out int mediaID))
                         {
-                            var media = mediaDatabse.FirstOrDefault(m => m.MediaID == mediaID);
+                            var media = _mediaService.FindMedia(mediaID);
 
                             if (media == null)
                             {
@@ -101,7 +102,7 @@ namespace Treasure_Bay.Controllers
                                     }
                                     else
                                     {
-                                        mediaDatabse.Remove(media);
+                                        _mediaService.DeleteMedia(media.MediaID);
                                         await SendResponseAsync(resp, "", 204);
                                     }
                                     break;
@@ -109,6 +110,7 @@ namespace Treasure_Bay.Controllers
                                     if (media.Creator.UserID != user.UserID)
                                     {
                                         await SendResponseAsync(resp, $"Error 403: You are not authorised to alter another user's media.", 403);
+                                        break;
                                     }
 
                                     using (var reader = new StreamReader(req.InputStream, req.ContentEncoding))
@@ -126,6 +128,7 @@ namespace Treasure_Bay.Controllers
                                     media.Title = mediaData.Title;
                                     media.Description = mediaData.Description ?? media.Description;
                                     media.ReleaseYear = mediaData.ReleaseYear;
+                                    _mediaService.UpdateMedia(media);
                                     string updatedJsonResponse = JsonConvert.SerializeObject(media);
                                     await SendResponseAsync(resp, updatedJsonResponse, 200, "application/json; charset=utf-8");
                                     break;
