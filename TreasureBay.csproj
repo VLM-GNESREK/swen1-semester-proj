@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="TreasureBay.Test\**" />
+    <EmbeddedResource Remove="TreasureBay.Test\**" />
+    <None Remove="TreasureBay.Test\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Npgsql" Version="9.0.4" />

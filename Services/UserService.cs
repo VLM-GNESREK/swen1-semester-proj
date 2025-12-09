@@ -25,12 +25,12 @@ namespace Treasure_Bay.Services
 
         public bool QueryUserExists(string _username)
         {
-           return _userRepository.GetUserByUseranme(_username) != null;
+           return _userRepository.GetUserByUsername(_username) != null;
         }
 
         public User? Login(string _username, string _password)
         {
-            User? user = _userRepository.GetUserByUseranme(_username);
+            User? user = _userRepository.GetUserByUsername(_username);
 
             if(user == null || !BCrypt.Net.BCrypt.Verify(_password, user.PasswordHash))
             {

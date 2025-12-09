@@ -6,7 +6,7 @@ namespace Treasure_Bay.Repositories
 {
     public interface IUserRepository
     {
-        User? GetUserByUseranme(string username);
+        User? GetUserByUsername(string username);
         int CreateUser(string username, string hashedPassword);
     }
 }

@@ -10,7 +10,7 @@ namespace Treasure_Bay.Repositories
 
         // ## METHODS ##
 
-        public User? GetUserByUseranme(string username) 
+        public User? GetUserByUsername(string username) 
         {
             using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
             {
