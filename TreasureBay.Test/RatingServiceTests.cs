@@ -1,6 +1,7 @@
 // TreasureBay.Test/RatingServiceTests.cs
 
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Payloads;
 using NUnit.Framework;
 using Treasure_Bay.Classes;
@@ -74,6 +75,28 @@ namespace Treasure_Bay.Tests
             double average = _ratingService.GetAverageRating(media);
 
             Assert.That(average, Is.EqualTo(4.0));
+        }
+
+        [Test]
+        public void GetTopSortedMedia_ShouldReturnSortedTopList()
+        {
+            User testUser = new User("TestUser", 1, "hash");
+            MediaEntry m1 = new MediaEntry(1, "Media1", "desc", 2004, testUser);
+            MediaEntry m2 = new MediaEntry(2, "Media2", "desc", 2005, testUser);
+            MediaEntry m3 = new MediaEntry(3, "Media3", "desc", 2006, testUser);
+
+            _fakeRepo.CreateRating(testUser, m1, 5, "Excellent!");
+            _fakeRepo.CreateRating(testUser, m2, 3, "Okay.");
+            _fakeRepo.CreateRating(testUser, m3, 1, "Terrible!");
+
+            List<MediaEntry> allMedia = new List<MediaEntry> { m3, m1, m2 };
+
+            List<MediaEntry> sortedList = _ratingService.GetTopRatedMedia(allMedia, 3);
+
+            Assert.That(sortedList[0], Is.EqualTo(m1));
+            Assert.That(sortedList[0].Title, Is.EqualTo("Media1"));
+
+            Assert.That(sortedList[2], Is.EqualTo(m3));
         }
     }
 }

@@ -43,5 +43,13 @@ namespace Treasure_Bay.Services
 
             return ratings.Average(r => r.StarValue);
         }
+
+        public List<MediaEntry> GetTopRatedMedia(List<MediaEntry> mediaList, int count)
+        {
+            return mediaList
+                            .OrderByDescending(m => GetAverageRating(m))
+                            .Take(count)
+                            .ToList();
+        }
     }
 }
