@@ -21,6 +21,11 @@ namespace Treasure_Bay.Services
 
         public Rating CreateRating(User user, MediaEntry media, int stars, string comment)
         {
+            var list = _repo.GetRatingsByMediaID(media);
+            if(list.FirstOrDefault(r => r.Reviewer.UserID == user.UserID) != null)
+            {
+                throw new InvalidOperationException("User has already rated this media.");
+            }
             int newID = _repo.CreateRating(user, media, stars, comment);
             Rating newRating = new Rating(newID, user, media, stars, comment);
             return newRating;

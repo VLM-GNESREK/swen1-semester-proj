@@ -1,5 +1,6 @@
 // TreasureBay.Test/RatingServiceTests.cs
 
+using System;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Payloads;
 using NUnit.Framework;
 using Treasure_Bay.Classes;
@@ -31,6 +32,22 @@ namespace Treasure_Bay.Tests
             Assert.That(rating.RatingID, Is.GreaterThan(0));
             Assert.That(rating.Media, Is.EqualTo(testMedia));
             Assert.That(rating.Reviewer, Is.EqualTo(testUser));
+        }
+
+        [Test]
+        public void CreateRating_ShouldThrowException_WhenUserAlreadyRated()
+        {
+            User user = new User("SpamUser", 2, "hash");
+            MediaEntry media = new MediaEntry(1, "Spam Target", "desc", 2020, user);
+
+            _fakeRepo.CreateRating(user, media, 4, "First Rating!");
+
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+            {
+                _ratingService.CreateRating(user, media, 1, "Spam Rating!");
+            });
+
+            Assert.That(ex.Message, Is.EqualTo("User has already rated this media."));
         }
     }
 }
