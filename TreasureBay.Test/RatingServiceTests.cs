@@ -49,5 +49,31 @@ namespace Treasure_Bay.Tests
 
             Assert.That(ex.Message, Is.EqualTo("User has already rated this media."));
         }
+
+        [Test]
+        public void GetAverageRating_ShouldReturnZero_WhenNoRatings()
+        {
+            User user = new User("User1", 1, "pw");
+            MediaEntry media = new MediaEntry(10, "Unpopular Movie", "desc", 2020, user);
+
+            double average = _ratingService.GetAverageRating(media);
+
+            Assert.That(average, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GetAverageRating_ShouldReturnCorrectAverage_WhenRatingsExist()
+        {
+            User u1 = new User("User1", 1, "pw");
+            User u2 = new User("User2", 2, "pw");
+            MediaEntry media = new MediaEntry(10, "Popular Movie", "desc", 2020, u1);
+
+            _fakeRepo.CreateRating(u1, media, 5, "Loved it!");
+            _fakeRepo.CreateRating(u2, media, 3, "It was okay.");
+
+            double average = _ratingService.GetAverageRating(media);
+
+            Assert.That(average, Is.EqualTo(4.0));
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 using Treasure_Bay.Classes;
 using Treasure_Bay.Repositories;
+using System.Linq;
 
 namespace Treasure_Bay.Services
 {
@@ -29,6 +30,18 @@ namespace Treasure_Bay.Services
             int newID = _repo.CreateRating(user, media, stars, comment);
             Rating newRating = new Rating(newID, user, media, stars, comment);
             return newRating;
+        }
+
+        public double GetAverageRating(MediaEntry media)
+        {
+            List<Rating> ratings = _repo.GetRatingsByMediaID(media);
+
+            if(ratings.Count == 0)
+            {
+                return 0;
+            }
+
+            return ratings.Average(r => r.StarValue);
         }
     }
 }
