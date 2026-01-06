@@ -81,6 +81,36 @@ namespace Treasure_Bay.Controllers
                             await SendResponseAsync(resp, $"Error 409: {ex.Message}", 409);
                         }
                     }
+                    else if(method == "GET")
+                    {
+                        var topParam = req.QueryString["top"];
+                        if(topParam != null && int.TryParse(topParam, out int count))
+                        {
+                            List<MediaEntry> topList = _ratingService.GetTopRatedMedia(_mediaService.GetAllMedia(), count);
+
+                            string jsonResponse = JsonConvert.SerializeObject(topList);
+                            await SendResponseAsync(resp, jsonResponse, 200, "application/json");
+                            break;
+                        }
+
+                        var mediaIDParam = req.QueryString["mediaID"];
+                        if(mediaIDParam != null && int.TryParse(mediaIDParam, out int mediaID))
+                        {
+                            MediaEntry? media = _mediaService.FindMedia(mediaID);
+                            if(media == null)
+                            {
+                                await SendResponseAsync(resp, "Error 404: Media not found.", 404);
+                                break;
+                            }
+
+                            var ratings = _ratingService.GetRatingsByMedia(media);
+                            string jsonResponse = JsonConvert.SerializeObject(ratings);
+                            await SendResponseAsync(resp, jsonResponse, 200, "application/json");
+                            break;
+                        }
+
+                        await SendResponseAsync(resp, "Error 400: Specify 'top' or 'mediaID' parameter.", 400);
+                    }
                     break;
             }
         }

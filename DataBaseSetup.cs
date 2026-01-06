@@ -44,6 +44,23 @@ public class DataBaseSetup
                 cmd.ExecuteNonQuery();
             }
 
+            sql = @"
+                CREATE TABLE IF NOT EXISTS ratings
+                (
+                    rating_id SERIAL PRIMARY KEY,
+                    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                    media_id INTEGER NOT NULL REFERENCES media(media_id) ON DELETE CASCADE,
+                    star_value INTEGER NOT NULL,
+                    comment TEXT,
+                    UNIQUE(user_id, media_id)
+                );
+            ";
+
+            using(var cmd = new NpgsqlCommand(sql, conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+
             Console.WriteLine("Database tables have been set up successfully!");
         }
     }

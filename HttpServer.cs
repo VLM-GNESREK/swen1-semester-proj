@@ -15,21 +15,24 @@ public class HttpServer
     private HttpListener _listener;
     private UserController _userController;
     private MediaController _mediaController;
+    private RatingController _ratingController;
     private Dictionary<string, BaseController> _routes;
 
     // ## METHODS ##
     // Constructor
 
-    public HttpServer(string url, UserController userController, MediaController mediaController)
+    public HttpServer(string url, UserController userController, MediaController mediaController, RatingController ratingController)
     {
         
         this._userController = userController;
         this._mediaController = mediaController;
+        this._ratingController = ratingController;
         _listener = new HttpListener();
         _listener.Prefixes.Add(url);
         _routes = new Dictionary<string, BaseController>();
         _routes["/api/users"] = userController;
         _routes["/api/media"] = mediaController;
+        _routes["/api/ratings"] = ratingController;
     }
 
     // Server Initialisation

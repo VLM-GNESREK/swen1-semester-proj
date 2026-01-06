@@ -51,5 +51,10 @@ namespace Treasure_Bay.Services
                             .Take(count)
                             .ToList();          
         }
+
+        public List<Rating> GetRatingsByMedia(MediaEntry media)
+        {
+            return _repo.GetRatingsByMediaID(media);
+        }
     }
 }

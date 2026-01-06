@@ -17,12 +17,15 @@ class Program
         string serverURL = "http://localhost:8080/";
         IUserRepository userRepository = new UserRepository();
         IMediaRepository mediaRepository = new MediaRepository();
+        IRatingRepository ratingRepository = new RatingRepository();
         UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService();
         MediaService mediaService = new MediaService(mediaRepository);
+        RatingService ratingService = new RatingService(ratingRepository);
         UserController userController = new UserController(userService, authService);
         MediaController mediaController = new MediaController(mediaService, authService);
-        HttpServer origin = new HttpServer(serverURL, userController, mediaController);
+        RatingController ratingController = new RatingController(ratingService, mediaService, authService);
+        HttpServer origin = new HttpServer(serverURL, userController, mediaController, ratingController);
         await origin.Start();
     }
 }
