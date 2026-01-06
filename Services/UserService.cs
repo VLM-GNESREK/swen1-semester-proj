@@ -1,8 +1,5 @@
 // Services/UserService.cs
 
-using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using Npgsql;
 using Treasure_Bay.Classes;
 using Treasure_Bay.DTO;
 using Treasure_Bay.Repositories;
@@ -15,12 +12,14 @@ namespace Treasure_Bay.Services
         // ## VARIABLES ##
 
         private readonly IUserRepository _userRepository;
+        private AuthService _authService;
 
         // ## METHODS ##
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, AuthService authService)
         {
             _userRepository = userRepository;
+            _authService = authService;
         }
 
         public bool QueryUserExists(string _username)
@@ -41,10 +40,15 @@ namespace Treasure_Bay.Services
 
         public UserResponseDTO Register(string _username, string Password)
         {
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(Password);
+            string hashedPassword = _authService.HashPassword(Password);
             int newID = _userRepository.CreateUser(_username, hashedPassword);
             User newUser = new User(_username, newID, hashedPassword);
             return new UserResponseDTO(newUser);
+        }
+
+        public User? GetUser(int userID)
+        {
+            return _userRepository.GetUserByID(userID);
         }
     }
 }

@@ -19,8 +19,8 @@ class Program
         IMediaRepository mediaRepository = new MediaRepository();
         IRatingRepository ratingRepository = new RatingRepository();
         AdminRepository adminRepository = new AdminRepository();
-        UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService();
+        UserService userService = new UserService(userRepository, authService);
         AdminService adminService = new AdminService(adminRepository);
         MediaService mediaService = new MediaService(mediaRepository);
         RatingService ratingService = new RatingService(ratingRepository);

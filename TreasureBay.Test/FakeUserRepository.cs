@@ -25,5 +25,10 @@ namespace Treasure_Bay.Tests
         {
             return _fakeDB.FirstOrDefault(u => u.Username == username);
         }
+
+        public User? GetUserByID(int userID)
+        {
+            return _fakeDB.FirstOrDefault(u => u.UserID  == userID);
+        }
     }
 }

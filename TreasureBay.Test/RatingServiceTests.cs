@@ -95,8 +95,19 @@ namespace Treasure_Bay.Tests
 
             Assert.That(sortedList[0], Is.EqualTo(m1));
             Assert.That(sortedList[0].Title, Is.EqualTo("Media1"));
-
             Assert.That(sortedList[2], Is.EqualTo(m3));
+        }
+
+        [Test]
+        public void GetRatingsByMedia_ShouldReturnEmptyList_WhenNoRatingsExist()
+        {
+            User user = new User("User1", 1, "pw");
+            MediaEntry media = new MediaEntry(50, "Quiet Movie", "shhh", 2023, user);
+
+            List<Rating> results = _ratingService.GetRatingsByMedia(media);
+
+            Assert.That(results, Is.Not.Null);
+            Assert.That(results, Is.Empty);
         }
     }
 }

@@ -1,5 +1,6 @@
 // Repositories/UserRepository.cs
 
+using System.Data.SqlTypes;
 using Npgsql;
 using Treasure_Bay.Classes;
 
@@ -51,6 +52,33 @@ namespace Treasure_Bay.Repositories
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
+        }
+
+        public User? GetUserByID(int userID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "SELECT user_id, username, password_hash FROM users WHERE user_id = @id";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", userID);
+
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        if(reader.Read())
+                        {
+                            return new User(
+                                reader.GetString(1),
+                                reader.GetInt32(0),
+                                reader.GetString(2)
+                            );
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

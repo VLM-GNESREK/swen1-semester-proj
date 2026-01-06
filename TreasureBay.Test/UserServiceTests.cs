@@ -11,12 +11,14 @@ namespace Treasure_Bay.Tests
     {
         private UserService _userService;
         private FakeUserRepository _fakeRepo;
+        private AuthService _authService;
 
         [SetUp]
         public void Setup()
         {
             _fakeRepo = new FakeUserRepository();
-            _userService = new UserService(_fakeRepo);
+            _authService = new AuthService();
+            _userService = new UserService(_fakeRepo, _authService);
         }
 
         [Test]
@@ -75,6 +77,34 @@ namespace Treasure_Bay.Tests
             bool answer = _userService.QueryUserExists("TestUser");
 
             Assert.That(answer, Is.True);
+        }
+
+        [Test]
+        public void QueryUserExists_ShouldBeFalse_WhenUserDoesNotExist()
+        {
+            bool answer = _userService.QueryUserExists("GhostUser");
+
+            Assert.That(answer, Is.False);
+        }
+
+        [Test]
+        public void GetUser_ShouldReturnUser_WhenValid()
+        {
+            var response = _userService.Register("FoundUser", "Pass");
+            int newID = response.UserID;
+
+            User? user = _userService.GetUser(newID);
+
+            Assert.That(user, Is.Not.Null);
+            Assert.That(user.UserID, Is.EqualTo(newID));
+        }
+
+        [Test]
+        public void GetUser_ShouldReturnNull_WhenUserDoesNotExist()
+        {
+            User? user = _userService.GetUser(999);
+
+            Assert.That(user, Is.Null);
         }
     }
 }
