@@ -6,6 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Treasure_Bay.Classes;
 using Treasure_Bay.Services;
+using Treasure_Bay.DTO;
 
 namespace Treasure_Bay.Controllers
 {
@@ -67,7 +68,11 @@ namespace Treasure_Bay.Controllers
                     }
                     else if (method == "GET") // Reading
                     {
-                        string jsonResponse = JsonConvert.SerializeObject(_mediaService.GetAllMedia());
+                        List<MediaEntry> rawMediaList = _mediaService.GetAllMedia();
+                        List<MediaResponseDTO> safeList = rawMediaList
+                                                            .Select(m => new MediaResponseDTO(m))
+                                                            .ToList();
+                        string jsonResponse = JsonConvert.SerializeObject(safeList);
                         await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
                     }
                     else

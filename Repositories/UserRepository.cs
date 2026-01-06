@@ -41,7 +41,7 @@ namespace Treasure_Bay.Repositories
             using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
             {
                 conn.Open();
-                var sql = "INSERT INTO users (username, password_hash) VALUES (@u, @p) RETURNUNG user_id";
+                var sql = "INSERT INTO users (username, password_hash) VALUES (@u, @p) RETURNING user_id";
 
                 using(var cmd = new NpgsqlCommand(sql, conn))
                 {

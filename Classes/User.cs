@@ -1,6 +1,7 @@
 // Classes/User.cs
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Treasure_Bay.Classes
 {
@@ -10,6 +11,7 @@ namespace Treasure_Bay.Classes
         // Largely Similar to C++ (Featuring Properties (shiny))
         public string Username { get; set; }
         public int UserID { get; private set; }
+        [JsonIgnore]
         public string PasswordHash { get; private set; }
         // Lists, basically C++ arrays. Live inside System.Collections.Generic or so StackOverflow says
         public List<Rating> Ratings { get; private set; }

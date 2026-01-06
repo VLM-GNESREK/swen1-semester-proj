@@ -48,24 +48,40 @@ public class HttpServer
             {
                 var req = res.Request;
                 var resp = res.Response;
-                var type = req.HttpMethod;
-                var path = req.Url?.AbsolutePath ?? "/";
-                System.Console.WriteLine($"Received {type} request for {path}");
-                var matchingRoute = _routes.FirstOrDefault(route => path.StartsWith(route.Key));
+                try
+                {
+                    var type = req.HttpMethod;
+                    var path = req.Url?.AbsolutePath ?? "/";
+                    System.Console.WriteLine($"Received {type} request for {path}");
+                    var matchingRoute = _routes.FirstOrDefault(route => path.StartsWith(route.Key));
 
-                if(matchingRoute.Value != null)
-                {
-                    await matchingRoute.Value.HandleRequest(req, resp);
+                    if(matchingRoute.Value != null)
+                    {
+                        await matchingRoute.Value.HandleRequest(req, resp);
+                    }
+                    else
+                    {
+                        resp.StatusCode = 404;
+                        string body = "Error 404: Page not found";
+                        var bytes3 = Encoding.UTF8.GetBytes(body);
+                        resp.ContentType = "text/plain; charset=utf-8";
+                        resp.ContentLength64 = bytes3.Length;
+                        await resp.OutputStream.WriteAsync(bytes3, 0, bytes3.Length);
+                        resp.Close();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    resp.StatusCode = 404;
-                    string body = "Error 404: Page not found";
-                    var bytes3 = Encoding.UTF8.GetBytes(body);
-                    resp.ContentType = "text/plain; charset=utf-8";
-                    resp.ContentLength64 = bytes3.Length;
-                    await resp.OutputStream.WriteAsync(bytes3, 0, bytes3.Length);
-                    resp.Close();
+                    System.Console.WriteLine($"CRITICAL ERROR handling request: {ex.Message}");
+                    System.Console.WriteLine(ex.StackTrace);
+
+                    try
+                    {
+                        resp.StatusCode = 500;
+                        resp.Close();
+                    }
+                    catch
+                    {}
                 }
             });
         }
