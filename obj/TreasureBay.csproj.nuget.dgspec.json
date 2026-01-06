@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Draken\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj": {}
+    "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Draken\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj": {
+    "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Draken\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
         "projectName": "TreasureBay",
-        "projectPath": "C:\\Users\\Draken\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
-        "packagesPath": "C:\\Users\\Draken\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Draken\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Draken\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

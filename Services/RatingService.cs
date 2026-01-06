@@ -49,7 +49,7 @@ namespace Treasure_Bay.Services
             return mediaList
                             .OrderByDescending(m => GetAverageRating(m))
                             .Take(count)
-                            .ToList();
+                            .ToList();          
         }
     }
 }
