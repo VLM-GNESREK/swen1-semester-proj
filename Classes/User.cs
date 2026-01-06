@@ -28,15 +28,5 @@ namespace Treasure_Bay.Classes
             this.Ratings = []; // ref Rating.cs; List of Rating Objects
             this.Favourites = []; // ref MediaEntry.cs; List of MediaEntry Objects
         }
-
-        // To be moved over to MediaController later:TM:
-
-        public void PostRating(MediaEntry media, int stars, string comment)
-        {
-            int ratingId = this.Ratings.Count + 1; // Temp Fake ID, replace with UID once you figure out how
-            Rating newRating = new Rating(ratingId, this, media, stars, comment);
-            this.Ratings.Add(newRating);
-            media.AddRating(newRating); // ref MediaEntry.cs
-        }
     }
 }

@@ -18,14 +18,17 @@ class Program
         IUserRepository userRepository = new UserRepository();
         IMediaRepository mediaRepository = new MediaRepository();
         IRatingRepository ratingRepository = new RatingRepository();
+        AdminRepository adminRepository = new AdminRepository();
         UserService userService = new UserService(userRepository);
         AuthService authService = new AuthService();
+        AdminService adminService = new AdminService(adminRepository);
         MediaService mediaService = new MediaService(mediaRepository);
         RatingService ratingService = new RatingService(ratingRepository);
         UserController userController = new UserController(userService, authService);
         MediaController mediaController = new MediaController(mediaService, authService);
+        AdminController adminController = new AdminController(adminService, authService);
         RatingController ratingController = new RatingController(ratingService, mediaService, authService);
-        HttpServer origin = new HttpServer(serverURL, userController, mediaController, ratingController);
+        HttpServer origin = new HttpServer(serverURL, userController, mediaController, ratingController, adminController);
         await origin.Start();
     }
 }
