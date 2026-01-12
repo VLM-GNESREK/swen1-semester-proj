@@ -16,12 +16,12 @@ namespace Treasure_Bay.Classes
         public bool ComVis { get; private set; }
         // connecty bits
         public User Reviewer { get; private set; }
-        public MediaEntry Media { get; private set; }
+        public MediaEntry? Media { get; private set; }
 
         // ## METHODS ##
         // Constructor
 
-        public Rating(int ratingID, User reviewer, MediaEntry media, int starValue, string comment)
+        public Rating(int ratingID, User reviewer, MediaEntry? media, int starValue, string comment)
         {
             this.RatingID = ratingID;
             this.Reviewer = reviewer;

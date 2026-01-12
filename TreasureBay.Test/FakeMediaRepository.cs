@@ -17,10 +17,16 @@ namespace Treasure_Bay.Tests
 
         // ## METHODS ##
 
-        public int CreateMedia(string title, string description, int release_year, int creator_id)
+        public int CreateMedia(string title, string description, int releaseYear, MediaType type, List<string> genres, int ageRestriction, int userID)
         {
-            User dummyUser = new User("Dummy", creator_id, "hash");
-            MediaEntry media = new MediaEntry(_nextID, title, description, release_year, dummyUser);
+            User fakeUser = new User("mockUser", userID, "hash");
+            
+            MediaEntry media = new MediaEntry(_nextID, title, description, releaseYear, fakeUser);
+            
+            media.Type = type;
+            media.Genres = genres;
+            media.AgeRestriction = ageRestriction;
+
             _fakeDB.Add(media);
             _nextID++;
             return media.MediaID;
@@ -36,13 +42,17 @@ namespace Treasure_Bay.Tests
             return _fakeDB;
         }
 
-        public void UpdateMedia(MediaEntry media)
+        public void UpdateMedia(MediaEntry media)   
         {
-            var existing = GetMediaByID(media.MediaID);
-            if(existing != null)
+            var existing = _fakeDB.FirstOrDefault(m => m.MediaID == media.MediaID);
+            if (existing != null)
             {
-                _fakeDB.Remove(existing);
-                _fakeDB.Add(media);
+                existing.Title = media.Title;
+                existing.Description = media.Description;
+                existing.ReleaseYear = media.ReleaseYear;
+                existing.Type = media.Type;
+                existing.Genres = media.Genres;
+                existing.AgeRestriction = media.AgeRestriction;
             }
         }
 
@@ -53,6 +63,31 @@ namespace Treasure_Bay.Tests
             {
                 _fakeDB.Remove(media);
             }
+        }
+
+        public List<MediaEntry> GetFilteredMedia(string? title, string? type, string? genre)
+        {
+            IEnumerable<MediaEntry> query = _fakeDB;
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                query = query.Where(m => m.Title.Contains(title, System.StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (!string.IsNullOrEmpty(type))
+            {
+                if(System.Enum.TryParse<MediaType>(type, true, out MediaType parsedType))
+                {
+                    query = query.Where(m => m.Type == parsedType);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(genre))
+            {
+                query = query.Where(m => m.Genres.Any(g => g.Equals(genre, System.StringComparison.OrdinalIgnoreCase)));
+            }
+
+            return query.ToList();
         }
     }
 }

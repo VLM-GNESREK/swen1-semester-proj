@@ -24,17 +24,26 @@ namespace Treasure_Bay.Tests
         [Test]
         public void CreateMedia_ShouldReturnObject_WhenValid()
         {
-            MediaEntry media = _mediaService.CreateMedia("Inception", "Dream movie", 2010, _dummyUser);
+            MediaEntry media = _mediaService.CreateMedia(
+                "Inception", 
+                "Dream movie", 
+                2010, 
+                MediaType.Movie, 
+                new List<string> { "Sci-Fi" }, 
+                12, 
+                _dummyUser
+            );
 
             Assert.That(media, Is.Not.Null);
             Assert.That(media.Title, Is.EqualTo("Inception"));
             Assert.That(media.MediaID, Is.GreaterThan(0));
+            Assert.That(media.Type, Is.EqualTo(MediaType.Movie));
         }
 
         [Test]
         public void FindMedia_ShouldReturnMedia_WhenMediaExists()
         {
-            var created = _mediaService.CreateMedia("Matrix", "Sci-Fi", 1999, _dummyUser);
+            var created = _mediaService.CreateMedia("Matrix", "Sci-Fi", 1999, MediaType.Movie, new List<string>(), 16, _dummyUser);
             var found = _mediaService.FindMedia(created.MediaID);
 
             Assert.That(found, Is.Not.Null);
@@ -45,15 +54,14 @@ namespace Treasure_Bay.Tests
         public void FindMedia_ShouldReturnNull_WhenMediaDoesNotExist()
         {
             var found = _mediaService.FindMedia(999);
-
             Assert.That(found, Is.Null);
         }
 
         [Test]
         public void GetAllMedia_ShouldReturnAllEntries()
         {
-            _mediaService.CreateMedia("Movie1", "Desc", 2000, _dummyUser);
-            _mediaService.CreateMedia("Movie2", "Desc", 2001, _dummyUser);
+            _mediaService.CreateMedia("Movie1", "Desc", 2000, MediaType.Movie, new List<string>(), 0, _dummyUser);
+            _mediaService.CreateMedia("Movie2", "Desc", 2001, MediaType.Movie, new List<string>(), 0, _dummyUser);
 
             List<MediaEntry> all = _mediaService.GetAllMedia();
 
@@ -64,7 +72,7 @@ namespace Treasure_Bay.Tests
         [Test]
         public void UpdateMedia_ShouldChangeTitle_WhenCalled()
         {
-            var media = _mediaService.CreateMedia("Old Title", "Desc", 2000, _dummyUser);
+            var media = _mediaService.CreateMedia("Old Title", "Desc", 2000, MediaType.Movie, new List<string>(), 0, _dummyUser);
             media.Title = "New Title";
             _mediaService.UpdateMedia(media);
 
@@ -76,7 +84,7 @@ namespace Treasure_Bay.Tests
         [Test]
         public void DeleteMedia_ShouldRemoveEntry_WhenCalled()
         {
-            var media = _mediaService.CreateMedia("Delete Me", "Desc", 2000, _dummyUser);
+            var media = _mediaService.CreateMedia("Delete Me", "Desc", 2000, MediaType.Movie, new List<string>(), 0, _dummyUser);
 
             _mediaService.DeleteMedia(media.MediaID);
 

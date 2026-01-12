@@ -38,6 +38,19 @@ namespace Treasure_Bay.Controllers
                     await SendResponseAsync(resp, $"Error 500: {ex.Message}", 500);
                 }
             }
+            else if(path.TrimEnd('/') == "/api/admin/drop" && method == "POST")
+            {
+                try
+                {
+                    _adminService.DropDatabase();
+                    DataBaseSetup.InitialiseDatabase();
+                    await SendResponseAsync(resp, "Database dropped and recreated.", 200);
+                }
+                catch(Exception ex)
+                {
+                    await SendResponseAsync(resp, $"Error 500: {ex.Message}", 500);
+                }
+            }
             else
             {
                 await SendResponseAsync(resp, "Error 404: Endpoint not found.", 404);

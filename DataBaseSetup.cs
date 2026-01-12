@@ -35,6 +35,9 @@ public class DataBaseSetup
                     title TEXT NOT NULL,
                     description TEXT,
                     release_year INTEGER,
+                    media_type TEXT,
+                    genre TEXT, 
+                    age_restriction INTEGER,
                     user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE
                 );
             ";
@@ -53,6 +56,20 @@ public class DataBaseSetup
                     star_value INTEGER NOT NULL,
                     comment TEXT,
                     UNIQUE(user_id, media_id)
+                );
+            ";
+
+            using(var cmd = new NpgsqlCommand(sql, conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+
+            sql = @"
+                CREATE TABLE IF NOT EXISTS favourites
+                (
+                    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                    media_id INTEGER NOT NULL REFERENCES media(media_id) ON DELETE CASCADE,
+                    PRIMARY KEY (user_id, media_id)
                 );
             ";
 

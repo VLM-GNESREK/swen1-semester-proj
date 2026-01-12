@@ -61,6 +61,12 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
+                        if (ratingData.stars < 1 || ratingData.stars > 5)
+                        {
+                            await SendResponseAsync(resp, "Error 400: Stars must be between 1 and 5.", 400);
+                            break;
+                        }
+
                         MediaEntry? media = _mediaService.FindMedia(ratingData.media_id);
 
                         if (media == null)

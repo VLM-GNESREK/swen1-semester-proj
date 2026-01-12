@@ -21,10 +21,23 @@ namespace Treasure_Bay.Services
             _mediaRepository = mediaRepository;
         }
 
-        public MediaEntry CreateMedia(string title, string description, int releaseYear, User user)
+        public MediaEntry CreateMedia(string title, string description, int releaseYear, MediaType type, List<string> genres, int ageRestriction, User user)
         {
-            int newID = _mediaRepository.CreateMedia(title, description, releaseYear, user.UserID);
+            int newID = _mediaRepository.CreateMedia
+                                                    (
+                                                        title, 
+                                                        description, 
+                                                        releaseYear, 
+                                                        type, 
+                                                        genres,
+                                                        ageRestriction,
+                                                        user.UserID
+                                                    );
             MediaEntry newMedia = new MediaEntry(newID, title, description, releaseYear, user);
+            newMedia.Type = type;
+            newMedia.Genres = genres;
+            newMedia.AgeRestriction = ageRestriction;
+            
             return newMedia;
         }
 
@@ -46,6 +59,12 @@ namespace Treasure_Bay.Services
         public List<MediaEntry> GetAllMedia()
         {
             List<MediaEntry> mediaList = _mediaRepository.GetAllMedia();
+            return mediaList;
+        }
+
+        public List<MediaEntry> GetFilteredMedia(string? title, string? type, string? genre)
+        {
+            List<MediaEntry> mediaList = _mediaRepository.GetFilteredMedia(title, type, genre);
             return mediaList;
         }
     }

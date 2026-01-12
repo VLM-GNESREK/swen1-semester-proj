@@ -15,6 +15,9 @@ namespace Treasure_Bay.Controllers
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int ReleaseYear { get; set; }
+        public string? MediaType { get; set; }
+        public List<string>? Genres { get; set; }
+        public int AgeRestriction { get; set; }
     }
     public class MediaController : BaseController
     {
@@ -62,13 +65,33 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
-                        var newMedia = _mediaService.CreateMedia(mediaData.Title, mediaData.Description, mediaData.ReleaseYear, user);
+                        if(!Enum.TryParse<MediaType>(mediaData.MediaType, true, out MediaType parsedType))
+                        {
+                            await SendResponseAsync(resp, $"Error 400: Invalid Media Type. Use 'Movie',  'Series', or 'Game'.", 400);
+                            break;
+                        }
+
+                        var newMedia = _mediaService.CreateMedia
+                                                    (
+                                                        mediaData.Title, 
+                                                        mediaData.Description, 
+                                                        mediaData.ReleaseYear, 
+                                                        parsedType,
+                                                        mediaData.Genres ?? new List<string>(),
+                                                        mediaData.AgeRestriction,
+                                                        user
+                                                    );
                         string jsonResponse = JsonConvert.SerializeObject(newMedia);
                         await SendResponseAsync(resp, jsonResponse, 201, "application/json; charset=utf-8");
                     }
                     else if (method == "GET") // Reading
                     {
-                        List<MediaEntry> rawMediaList = _mediaService.GetAllMedia();
+                        string? searchTitle = req.QueryString["title"];
+                        string? filterType = req.QueryString["type"];
+                        string? filterGenre = req.QueryString["genre"];
+
+                        List<MediaEntry> rawMediaList = _mediaService.GetFilteredMedia(searchTitle, filterType, filterGenre);
+
                         List<MediaResponseDTO> safeList = rawMediaList
                                                             .Select(m => new MediaResponseDTO(m))
                                                             .ToList();

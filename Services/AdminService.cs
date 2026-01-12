@@ -17,5 +17,10 @@ namespace Treasure_Bay.Services
         {
             _adminRepo.ResetDatabase();
         }
+
+        public void DropDatabase()
+        {
+            _adminRepo.DropDatabase();
+        }
     }
 }

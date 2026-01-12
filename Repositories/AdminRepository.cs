@@ -19,5 +19,19 @@ namespace Treasure_Bay.Repositories
                 }
             }
         }
+
+        public void DropDatabase()
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "DROP TABLE IF EXISTS favourites, ratings, media, users CASCADE;";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

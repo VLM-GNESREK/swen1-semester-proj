@@ -56,5 +56,11 @@ namespace Treasure_Bay.Services
         {
             return _repo.GetRatingsByMediaID(media);
         }
+
+        public void UpdateRating(User user, int ratingId, int stars, string comment)
+        {
+            Rating ratingToUpdate = new Rating(ratingId, user, null, stars, comment); 
+            _repo.UpdateRating(ratingToUpdate);
+        }
     }
 }
