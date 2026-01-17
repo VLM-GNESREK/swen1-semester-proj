@@ -30,5 +30,39 @@ namespace Treasure_Bay.Tests
         {
             return _fakeDB.FirstOrDefault(u => u.UserID  == userID);
         }
+
+        public void AddFavourite(int userID, int mediaID)
+        {
+            var user = GetUserByID(userID);
+            if(user != null)
+            {
+                if(!user.Favourites.Any(m => m.MediaID == mediaID))
+                {
+                    User dummyCreator = new User("DummyCreator", 999, "hash");
+                    MediaEntry dummyMedia = new MediaEntry(mediaID, "Test Media" + mediaID, "Desc", 2024, dummyCreator);
+
+                    user.Favourites.Add(dummyMedia);
+                }
+            }
+        }
+
+        public void RemoveFavourite(int userID, int mediaID)
+        {
+            var user = GetUserByID(userID);
+            if(user != null)
+            {
+                var mediaToRemove = user.Favourites.FirstOrDefault(m => m.MediaID == mediaID);
+                if(mediaToRemove != null)
+                {
+                    user.Favourites.Remove(mediaToRemove);
+                }
+            }
+        }
+
+        public List<MediaEntry> GetFavourites(int userID)
+        {
+            var user = GetUserByID(userID);
+            return user != null ? user.Favourites : new List<MediaEntry>();
+        }
     }
 }

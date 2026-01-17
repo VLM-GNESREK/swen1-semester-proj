@@ -31,7 +31,7 @@ namespace Treasure_Bay.Services
         {
             User? user = _userRepository.GetUserByUsername(_username);
 
-            if(user == null || !BCrypt.Net.BCrypt.Verify(_password, user.PasswordHash))
+            if(user == null || !_authService.VerifyPassword(_password, user.PasswordHash))
             {
                 return null;
             }
@@ -49,6 +49,23 @@ namespace Treasure_Bay.Services
         public User? GetUser(int userID)
         {
             return _userRepository.GetUserByID(userID);
+        }
+
+        public void RemoveFavourite(int userID, int mediaID)
+        {
+            _userRepository.RemoveFavourite(userID, mediaID);
+        }
+
+        public void AddFavourite(int userID, int mediaID)
+        {
+            _userRepository.AddFavourite(userID, mediaID);
+        }
+
+        public List<MediaResponseDTO> GetFavourites(int userID)
+        {
+            List<MediaEntry> favs = _userRepository.GetFavourites(userID);
+            List<MediaResponseDTO> favDTOs = favs.Select(entry => new MediaResponseDTO(entry)).ToList();
+            return favDTOs;
         }
     }
 }
