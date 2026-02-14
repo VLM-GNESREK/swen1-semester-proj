@@ -2170,32 +2170,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "/home/LXD-002-GNESREK/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.Test\\TreasureBay.Test.csproj",
+      "projectUniqueName": "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.Test/TreasureBay.Test.csproj",
       "projectName": "TreasureBay.Test",
-      "projectPath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.Test\\TreasureBay.Test.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.Test\\obj\\",
+      "projectPath": "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.Test/TreasureBay.Test.csproj",
+      "packagesPath": "/home/LXD-002-GNESREK/.nuget/packages/",
+      "outputPath": "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.Test/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/LXD-002-GNESREK/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "/usr/lib64/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj": {
-              "projectPath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj"
+            "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.csproj": {
+              "projectPath": "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.csproj"
             }
           }
         }
@@ -2210,7 +2211,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -2253,7 +2254,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

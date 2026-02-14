@@ -1,44 +1,66 @@
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.csproj.AssemblyReference.cache
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.AssemblyInfoInputs.cache
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.AssemblyInfo.cs
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.csproj.CoreCompileInputs.cache
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.sourcelink.json
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.exe
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.deps.json
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.runtimeconfig.json
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.pdb
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\BCrypt.Net-Next.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Newtonsoft.Json.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Npgsql.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\Treasure.ABD31BE0.Up2Date
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\refint\TreasureBay.dll
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.pdb
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.genruntimeconfig.cache
-C:\Users\Admin\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\ref\TreasureBay.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.exe
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.deps.json
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.runtimeconfig.json
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\TreasureBay.pdb
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\BCrypt.Net-Next.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Newtonsoft.Json.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\bin\Debug\net9.0\Npgsql.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.csproj.AssemblyReference.cache
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.AssemblyInfoInputs.cache
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.AssemblyInfo.cs
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.csproj.CoreCompileInputs.cache
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.sourcelink.json
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\Treasure.ABD31BE0.Up2Date
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\refint\TreasureBay.dll
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.pdb
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\TreasureBay.genruntimeconfig.cache
-C:\Users\Draken\OneDrive\Bachelor Studium\Informatik 2024-Present\Semester 3 - WiSe 2025\Software Engineering\Semester Project\Treasure_Bay\obj\Debug\net9.0\ref\TreasureBay.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.csproj.AssemblyReference.cache
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.AssemblyInfoInputs.cache
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.AssemblyInfo.cs
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.csproj.CoreCompileInputs.cache
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.sourcelink.json
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.exe
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.deps.json
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.runtimeconfig.json
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.pdb
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/BCrypt.Net-Next.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Newtonsoft.Json.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Npgsql.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/Treasure.ABD31BE0.Up2Date
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/refint/TreasureBay.dll
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.pdb
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.genruntimeconfig.cache
+C:/Users/Admin/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/ref/TreasureBay.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.exe
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.deps.json
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.runtimeconfig.json
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/TreasureBay.pdb
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/BCrypt.Net-Next.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Newtonsoft.Json.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/bin/Debug/net9.0/Npgsql.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.csproj.AssemblyReference.cache
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.AssemblyInfoInputs.cache
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.AssemblyInfo.cs
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.csproj.CoreCompileInputs.cache
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.sourcelink.json
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/Treasure.ABD31BE0.Up2Date
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/refint/TreasureBay.dll
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.pdb
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/TreasureBay.genruntimeconfig.cache
+C:/Users/Draken/OneDrive/Bachelor Studium/Informatik 2024-Present/Semester 3 - WiSe 2025/Software Engineering/Semester Project/Treasure_Bay/obj/Debug/net9.0/ref/TreasureBay.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/TreasureBay
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/TreasureBay.deps.json
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/TreasureBay.runtimeconfig.json
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/TreasureBay.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/TreasureBay.pdb
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/BCrypt.Net-Next.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/Newtonsoft.Json.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/bin/Debug/net9.0/Npgsql.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.csproj.AssemblyReference.cache
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.GeneratedMSBuildEditorConfig.editorconfig
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.AssemblyInfoInputs.cache
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.AssemblyInfo.cs
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.csproj.CoreCompileInputs.cache
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.sourcelink.json
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/Treasure.ABD31BE0.Up2Date
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/refint/TreasureBay.dll
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.pdb
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/TreasureBay.genruntimeconfig.cache
+/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/obj/Debug/net9.0/ref/TreasureBay.dll

@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "GRtrMUZ6xs4=",
+  "dgSpecHash": "ua+GjhHWB/k=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Bachelor Studium\\Informatik 2024-Present\\Semester 3 - WiSe 2025\\Software Engineering\\Semester Project\\Treasure_Bay\\TreasureBay.csproj",
+  "projectFilePath": "/home/LXD-002-GNESREK/dev/Software Engineering WS2025/Semester Project/TreasureBay.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\npgsql\\9.0.4\\npgsql.9.0.4.nupkg.sha512"
+    "/home/LXD-002-GNESREK/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/home/LXD-002-GNESREK/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/home/LXD-002-GNESREK/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.2/microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "/home/LXD-002-GNESREK/.nuget/packages/newtonsoft.json/13.0.4/newtonsoft.json.13.0.4.nupkg.sha512",
+    "/home/LXD-002-GNESREK/.nuget/packages/npgsql/9.0.4/npgsql.9.0.4.nupkg.sha512",
+    "/home/LXD-002-GNESREK/.nuget/packages/microsoft.netcore.app.host.linux-x64/9.0.12/microsoft.netcore.app.host.linux-x64.9.0.12.nupkg.sha512"
   ],
   "logs": []
 }

@@ -59,8 +59,38 @@ namespace Treasure_Bay.Services
 
         public void UpdateRating(User user, int ratingId, int stars, string comment)
         {
-            Rating ratingToUpdate = new Rating(ratingId, user, null, stars, comment); 
-            _repo.UpdateRating(ratingToUpdate);
+            Rating? rating = _repo.GetRatingByID(ratingId);
+
+            if(rating == null)
+            {
+                throw new KeyNotFoundException("Rating not found.");
+            }
+
+            if(rating.Reviewer.UserID != user.UserID)
+            {
+                throw new UnauthorizedAccessException("You can only edit your own ratings.");
+            }
+
+            rating.StarValue = stars;
+            rating.Comment = comment;
+            _repo.UpdateRating(rating);
+        }
+
+        public void DeleteRating(int ratingID, User user)
+        {
+            Rating? rating = _repo.GetRatingByID(ratingID);
+
+            if(rating == null)
+            {
+                throw new KeyNotFoundException("Rating not found.");
+            }
+
+            if(rating.Reviewer.UserID != user.UserID)
+            {
+                throw new UnauthorizedAccessException("User does not have permission to delete this rating.");
+            }
+
+            _repo.DeleteRating(rating);
         }
     }
 }

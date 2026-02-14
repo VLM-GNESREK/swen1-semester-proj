@@ -109,5 +109,81 @@ namespace Treasure_Bay.Tests
             Assert.That(results, Is.Not.Null);
             Assert.That(results, Is.Empty);
         }
+
+        [Test]
+        public void UpdateRating_ShouldUpdate_WhenUserOwnsRating()
+        {
+            User owner = new User("Owner", 10, "pw");
+            MediaEntry media = new MediaEntry(100, "Movie", "desc", 2022, owner);
+            _fakeRepo.CreateRating(owner, media, 2, "Bad Movie");
+            int ratingID = 1;
+
+            _ratingService.UpdateRating(owner, ratingID, 5, "Actually good");
+
+            var updatedRating = _fakeRepo.GetRatingByID(ratingID);
+            Assert.That(updatedRating?.StarValue, Is.EqualTo(5));
+            Assert.That(updatedRating.Comment, Is.EqualTo("Actually good"));
+        }
+
+        [Test]
+        public void UpdateRating_ShouldThrow_WhenUserDoesNotOwnRating()
+        {
+            User owner = new User("Owner", 10, "pw");
+            User hacker = new User("Hacker", 99, "pw");
+            MediaEntry media = new MediaEntry(100, "Movie", "desc", 2022, owner);
+
+            _fakeRepo.CreateRating(owner, media, 5, "My Rating");
+            int ratingID = 1;
+
+            var ex = Assert.Throws<UnauthorizedAccessException>(() =>
+            {
+                _ratingService.UpdateRating(hacker, ratingID, 1, "Hacked");
+            });
+
+            Assert.That(ex.Message, Does.Contain("own ratings"));
+        }
+
+        [Test]
+        public void UpdateRating_ShouldThrow_WhenRatingNotFound()
+        {
+            User user = new User("User", 1, "pw");
+
+            var ex = Assert.Throws<KeyNotFoundException>(() =>
+            {
+                _ratingService.UpdateRating(user, 9999, 5, "Ghost Rating");
+            });
+
+            Assert.That(ex.Message, Is.EqualTo("Rating not found."));
+        }
+
+        [Test]
+        public void DeleteRating_ShouldRemove_WhenUserOwnsRating()
+        {
+            User owner = new User("Owner", 10, "pw");
+            MediaEntry media = new MediaEntry(100, "Movie", "desc", 2022, owner);
+            _fakeRepo.CreateRating(owner, media, 3, "To Delete");
+            int ratingID = 1;
+
+            _ratingService.DeleteRating(ratingID, owner);
+
+            var deletedRating = _fakeRepo.GetRatingByID(ratingID);
+            Assert.That(deletedRating, Is.Null);
+        }
+
+        [Test]
+        public void DeleteRating_ShouldThrow_WhenUserDoesNotOwnRating()
+        {
+            User owner = new User("Owner", 10, "pw");
+            User hacker = new User("Hacker", 99, "pw");
+            MediaEntry media = new MediaEntry(100, "Movie", "desc", 2022, owner);
+
+            _fakeRepo.CreateRating(owner, media, 5, "My Rating");
+            int ratingID = 1;
+
+            Assert.Throws<UnauthorizedAccessException>(() =>
+            {
+                _ratingService.DeleteRating(ratingID, hacker);
+            });
+        }
     }
 }

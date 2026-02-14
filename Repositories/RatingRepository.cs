@@ -141,5 +141,56 @@ namespace Treasure_Bay.Repositories
                 }
             }
         }
+
+        public Rating? GetRatingByID(int ratingID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = @"
+                            SELECT
+                                r.rating_id, r.star_value, r.comment, r.user_id, r.media_id,
+                                m.title, m.description, m.release_year, m.user_id,
+                                u.username, u.password_hash
+                            FROM ratings r
+                            JOIN media m ON r.media_id = m.media_id
+                            JOIN users u ON r.user_id = u.user_id
+                            WHERE r.rating_id = @id";
+                
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", ratingID);
+                    
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        if(reader.Read())
+                        {
+                            // 0: rating_id is passed in
+                            int stars = reader.GetInt32(1);
+                            string comment = reader.GetString(2);
+                            int reviewerID = reader.GetInt32(3);
+                            int mediaID = reader.GetInt32(4);
+                            
+                            string title = reader.GetString(5);
+                            string desc = reader.IsDBNull(6) ? "" : reader.GetString(6);
+                            int r_year = reader.GetInt32(7);
+                            int creatorID = reader.GetInt32(8);
+                            
+                            string username = reader.GetString(9);
+                            string pw_hash = reader.GetString(10);
+                            User reviewer = new User(username, reviewerID, pw_hash);
+                            User creatorPlaceholder = new User("Unknown", creatorID, "");
+                            MediaEntry media = new MediaEntry(mediaID, title, desc, r_year, creatorPlaceholder);
+
+                            return new Rating(ratingID, reviewer, media, stars, comment);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

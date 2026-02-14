@@ -44,5 +44,10 @@ namespace Treasure_Bay.Tests
         {
             _fakeRatingDB.Remove(rating);
         }
+
+        public Rating? GetRatingByID(int ratingID)
+        {
+            return _fakeRatingDB.FirstOrDefault(r => r.RatingID == ratingID);
+        }
     }
 }

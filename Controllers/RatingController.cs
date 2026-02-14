@@ -35,7 +35,7 @@ namespace Treasure_Bay.Controllers
 
             if (user == null)
             {
-                await SendResponseAsync(resp, $"Error 401: Unauthorised.", 401);
+                await SendResponseAsync(resp, $"Error 401: Unauthorised.", 401); // Unauthorised Web Request (lacking credentials)
                 return;
             }
 
@@ -57,13 +57,13 @@ namespace Treasure_Bay.Controllers
 
                         if (ratingData == null || ratingData.media_id == 0 || ratingData.stars == 0)
                         {
-                            await SendResponseAsync(resp, "Error 400: Rating and valid Media ID are required.", 400);
+                            await SendResponseAsync(resp, "Error 400: Rating and valid Media ID are required.", 400); // Bad Request
                             break;
                         }
 
                         if (ratingData.stars < 1 || ratingData.stars > 5)
                         {
-                            await SendResponseAsync(resp, "Error 400: Stars must be between 1 and 5.", 400);
+                            await SendResponseAsync(resp, "Error 400: Stars must be between 1 and 5.", 400); // Bad Request
                             break;
                         }
 
@@ -71,7 +71,7 @@ namespace Treasure_Bay.Controllers
 
                         if (media == null)
                         {
-                            await SendResponseAsync(resp, "Error 404: Media not found.", 404);
+                            await SendResponseAsync(resp, "Error 404: Media not found.", 404); // Not Found
                             break;
                         }
 
@@ -105,7 +105,7 @@ namespace Treasure_Bay.Controllers
                             MediaEntry? media = _mediaService.FindMedia(mediaID);
                             if(media == null)
                             {
-                                await SendResponseAsync(resp, "Error 404: Media not found.", 404);
+                                await SendResponseAsync(resp, "Error 404: Media not found.", 404); // Not Found
                                 break;
                             }
 
@@ -115,7 +115,73 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
-                        await SendResponseAsync(resp, "Error 400: Specify 'top' or 'mediaID' parameter.", 400);
+                        await SendResponseAsync(resp, "Error 400: Specify 'top' or 'mediaID' parameter.", 400); // Bad Request
+                    }
+                    break;
+                default:  
+                    if(path.StartsWith("api/ratings/"))
+                    {
+                        string idSegment = path.Split('/').Last();
+                        if(!int.TryParse(idSegment, out int ratingID))
+                        {
+                            await SendResponseAsync(resp, "Error 400: Invalid Rating ID", 400); // Bad Request
+                            break;
+                        }
+
+                        switch(method)
+                        {
+                            case "DELETE":
+                                try
+                                {
+                                    _ratingService.DeleteRating(ratingID, user);
+                                    await SendResponseAsync(resp, "", 204); // No Content
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, "Error 404: Rating not found.", 404); // Not Found
+                                }
+                                catch(UnauthorizedAccessException)
+                                {
+                                    await SendResponseAsync(resp, "Error 403: Not authorised.", 403); // Forbidden (Not Owner)
+                                }
+                                break;
+                            
+                            case "PUT":
+                                using(var reader = new StreamReader(req.InputStream, req.ContentEncoding))
+                                {
+                                    requestBody = await reader.ReadToEndAsync();
+                                }
+                                var updateData = JsonConvert.DeserializeObject<RatingCreateRequest>(requestBody);
+
+                                if(updateData == null || updateData.stars < 1 || updateData.stars > 5)
+                                {
+                                    await SendResponseAsync(resp, "Error 400: Valid Stars (1-5) required.", 400); // Bad Request
+                                    break;
+                                }
+
+                                try
+                                {
+                                    _ratingService.UpdateRating(user, ratingID, updateData.stars, updateData.comment ?? "");
+                                    await SendResponseAsync(resp, "Rating updated.", 200); // OK
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, "Error 404: Rating not found.", 404); // Not Found
+                                }
+                                catch(UnauthorizedAccessException)
+                                {
+                                    await SendResponseAsync(resp, "Error 403: Not authorised.", 403); // Forbidden (Not Owner)
+                                }
+                                break;
+
+                            default:
+                                await SendResponseAsync(resp, "Error 405: Method not allowed.", 405); // As it says on the tin
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        await SendResponseAsync(resp, "Error 404: API Endpoint not found.", 404); // Not Found
                     }
                     break;
             }

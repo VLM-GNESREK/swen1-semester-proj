@@ -11,5 +11,6 @@ namespace Treasure_Bay.Repositories
         List<Rating> GetRatingsByUserID(User reviewer);
         void UpdateRating(Rating rating);
         void DeleteRating(Rating rating);
+        Rating? GetRatingByID(int ratingID);
     }
 }

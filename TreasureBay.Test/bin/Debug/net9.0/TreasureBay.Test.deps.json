@@ -10,10 +10,8 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "18.0.1",
           "NUnit": "4.4.0",
-          "NUnit.Analyzers": "4.4.0",
           "NUnit3TestAdapter": "6.0.0",
-          "TreasureBay": "1.0.0",
-          "coverlet.collector": "6.0.2"
+          "TreasureBay": "1.0.0"
         },
         "runtime": {
           "TreasureBay.Test.dll": {}
@@ -27,11 +25,7 @@
           }
         }
       },
-      "coverlet.collector/6.0.2": {},
       "Microsoft.ApplicationInsights/2.23.0": {
-        "dependencies": {
-          "System.Diagnostics.DiagnosticSource": "5.0.0"
-        },
         "runtime": {
           "lib/netstandard2.0/Microsoft.ApplicationInsights.dll": {
             "assemblyVersion": "2.23.0.29",
@@ -355,9 +349,6 @@
         }
       },
       "Microsoft.TestPlatform.ObjectModel/18.0.1": {
-        "dependencies": {
-          "System.Reflection.Metadata": "8.0.0"
-        },
         "runtime": {
           "lib/net8.0/Microsoft.TestPlatform.CoreUtilities.dll": {
             "assemblyVersion": "15.0.0.0",
@@ -631,7 +622,6 @@
           }
         }
       },
-      "NUnit.Analyzers/4.4.0": {},
       "NUnit3TestAdapter/6.0.0": {
         "dependencies": {
           "Microsoft.Extensions.DependencyModel": "10.0.0",
@@ -639,19 +629,12 @@
           "Microsoft.Testing.Platform.MSBuild": "2.0.2"
         }
       },
-      "System.Collections.Immutable/8.0.0": {},
-      "System.Diagnostics.DiagnosticSource/5.0.0": {},
       "System.IO.Pipelines/10.0.0": {
         "runtime": {
           "lib/net9.0/System.IO.Pipelines.dll": {
             "assemblyVersion": "10.0.0.0",
             "fileVersion": "10.0.25.52411"
           }
-        }
-      },
-      "System.Reflection.Metadata/8.0.0": {
-        "dependencies": {
-          "System.Collections.Immutable": "8.0.0"
         }
       },
       "System.Text.Encodings.Web/10.0.0": {
@@ -715,13 +698,6 @@
       "sha512": "sha512-W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA==",
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
-    },
-    "coverlet.collector/6.0.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bJShQ6uWRTQ100ZeyiMqcFlhP7WJ+bCuabUs885dJiBEzMsJMSFr7BOyeCw4rgvQokteGi5rKQTlkhfQPUXg2A==",
-      "path": "coverlet.collector/6.0.2",
-      "hashPath": "coverlet.collector.6.0.2.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.23.0": {
       "type": "package",
@@ -842,13 +818,6 @@
       "path": "nunit/4.4.0",
       "hashPath": "nunit.4.4.0.nupkg.sha512"
     },
-    "NUnit.Analyzers/4.4.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-VVl1CuQttXRZh52HRw5SIOut3qXw4pmuiTYk02jTELVWZ9uYRY8IVl2qF9Zs7W0ElPiLDUrAglFBzNLBCPzEcw==",
-      "path": "nunit.analyzers/4.4.0",
-      "hashPath": "nunit.analyzers.4.4.0.nupkg.sha512"
-    },
     "NUnit3TestAdapter/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -856,33 +825,12 @@
       "path": "nunit3testadapter/6.0.0",
       "hashPath": "nunit3testadapter.6.0.0.nupkg.sha512"
     },
-    "System.Collections.Immutable/8.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AurL6Y5BA1WotzlEvVaIDpqzpIPvYnnldxru8oXJU2yFxFUy3+pNXjXd1ymO+RA0rq0+590Q8gaz2l3Sr7fmqg==",
-      "path": "system.collections.immutable/8.0.0",
-      "hashPath": "system.collections.immutable.8.0.0.nupkg.sha512"
-    },
-    "System.Diagnostics.DiagnosticSource/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-tCQTzPsGZh/A9LhhA6zrqCRV4hOHsK90/G7q3Khxmn6tnB1PuNU0cRaKANP2AWcF9bn0zsuOoZOSrHuJk6oNBA==",
-      "path": "system.diagnostics.diagnosticsource/5.0.0",
-      "hashPath": "system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512"
-    },
     "System.IO.Pipelines/10.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-M1eb3nfXntaRJPrrMVM9EFS8I1bDTnt0uvUS6QP/SicZf/ZZjydMD5NiXxfmwW/uQwaMDP/yX2P+zQN1NBHChg==",
       "path": "system.io.pipelines/10.0.0",
       "hashPath": "system.io.pipelines.10.0.0.nupkg.sha512"
-    },
-    "System.Reflection.Metadata/8.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ptvgrFh7PvWI8bcVqG5rsA/weWM09EnthFHR5SCnS6IN+P4mj6rE1lBDC4U8HL9/57htKAqy4KQ3bBj84cfYyQ==",
-      "path": "system.reflection.metadata/8.0.0",
-      "hashPath": "system.reflection.metadata.8.0.0.nupkg.sha512"
     },
     "System.Text.Encodings.Web/10.0.0": {
       "type": "package",
