@@ -1,5 +1,6 @@
 // Repositories/MediaRepository.cs
 
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using Npgsql;
@@ -211,6 +212,82 @@ namespace Treasure_Bay.Repositories
                 }
             }
             return mediaList;
+        }
+
+        public void AddFavourite(int userID, int mediaID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "INSERT INTO favourites (user_id, media_id) VALUES (@u, @m)";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("u", userID);
+                    cmd.Parameters.AddWithValue("m", mediaID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void RemoveFavourite(int userID, int mediaID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "DELETE FROM favourites WHERE user_id = @u AND media_id = @m";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("u", userID);
+                    cmd.Parameters.AddWithValue("m", mediaID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<MediaEntry> GetFavouritesByUserID(int userID)
+        {
+            List<MediaEntry> favourites = new List<MediaEntry>();
+
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = @"SELECT 
+                                m.media_id, m.title, m.description, m.release_year,
+                                u.user_id AS creator_id, u.username, u.password_hash
+                            FROM favourites f
+                            JOIN media m ON f.media_id = m.media_id
+                            JOIN users u ON m.user_id = u.user_id
+                            WHERE f.user_id = @u";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("u", userID);
+
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            int mediaID = reader.GetInt32(0);
+                            string title = reader.GetString(1);
+                            string desc = reader.IsDBNull(2) ? "" : reader.GetString(2);
+                            int releaseYear = reader.GetInt32(3);
+
+                            int creatorID = reader.GetInt32(4);
+                            string creatorUsername = reader.GetString(5);
+                            string creatorHash = reader.GetString(6);
+
+                            User creator = new User(creatorUsername, creatorID, creatorHash);
+                            MediaEntry media = new MediaEntry(mediaID, title, desc, releaseYear, creator);
+
+                            favourites.Add(media);
+                        }
+                    }
+                }
+            }
+
+            return favourites;
         }
     }
 }

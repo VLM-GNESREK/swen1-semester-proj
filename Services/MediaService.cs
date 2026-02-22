@@ -67,5 +67,28 @@ namespace Treasure_Bay.Services
             List<MediaEntry> mediaList = _mediaRepository.GetFilteredMedia(title, type, genre);
             return mediaList;
         }
+
+        public void AddFavourite(int userID, int mediaID)
+        {
+            if(_mediaRepository.GetMediaByID(mediaID) == null)
+            {
+                throw new KeyNotFoundException("Media not found.");
+            }
+            _mediaRepository.AddFavourite(userID, mediaID);
+        }
+
+        public void RemoveFavourite(int userID, int mediaID)
+        {
+            if(_mediaRepository.GetMediaByID(mediaID) == null)
+            {
+                throw new KeyNotFoundException("Media not found.");
+            }
+            _mediaRepository.RemoveFavourite(userID, mediaID);
+        }
+
+        public List<MediaEntry> GetFavouritesByUserID(int userID)
+        {
+            return _mediaRepository.GetFavouritesByUserID(userID);
+        }
     }
 }

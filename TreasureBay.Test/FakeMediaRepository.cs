@@ -13,6 +13,7 @@ namespace Treasure_Bay.Tests
         // ## VARIABLES ##
 
         private List<MediaEntry> _fakeDB = new List<MediaEntry>();
+        private List<(int userID, int mediaID)> _favourites = new List<(int userID, int mediaID)>();
         private int _nextID = 1;
 
         // ## METHODS ##
@@ -88,6 +89,25 @@ namespace Treasure_Bay.Tests
             }
 
             return query.ToList();
+        }
+
+        public void AddFavourite(int userID, int mediaID)
+        {
+            if(!_favourites.Any(f => f.userID == userID && f.mediaID == mediaID))
+            {
+                _favourites.Add((userID, mediaID));
+            }
+        }
+
+        public void RemoveFavourite(int userID, int mediaID)
+        {
+            _favourites.RemoveAll(f => f.userID == userID && f.mediaID == mediaID);
+        }
+
+        public List<MediaEntry> GetFavouritesByUserID(int userID)
+        {
+            var favMediaIDs = _favourites.Where(f => f.userID == userID).Select(f => f.mediaID).ToList();
+            return _fakeDB.Where(m => favMediaIDs.Contains(m.MediaID)).ToList();
         }
     }
 }
