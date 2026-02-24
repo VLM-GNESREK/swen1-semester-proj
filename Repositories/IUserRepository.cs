@@ -1,6 +1,7 @@
 // Repositories/IUserRepository.cs
 
 using Treasure_Bay.Classes;
+using Treasure_Bay.DTO;
 
 namespace Treasure_Bay.Repositories
 {
@@ -12,5 +13,6 @@ namespace Treasure_Bay.Repositories
         void AddFavourite(int userID, int mediaID);
         void RemoveFavourite(int userID, int mediaID);
         List<MediaEntry> GetFavourites(int userID);
+        UserProfileDTO? GetUserStatistics(int userID);
     }
 }

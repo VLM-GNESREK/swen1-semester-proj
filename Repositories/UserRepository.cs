@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlTypes;
 using Npgsql;
 using Treasure_Bay.Classes;
+using Treasure_Bay.DTO;
 
 namespace Treasure_Bay.Repositories
 {
@@ -155,6 +156,41 @@ namespace Treasure_Bay.Repositories
                 }
             }
             return favourites;
+        }
+
+        public UserProfileDTO? GetUserStatistics(int userID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = @"
+                            SELECT
+                                u.username,
+                                (SELECT COUNT(*) FROM media WHERE user_id = @id) AS media_count,
+                                (SELECT COUNT(*) FROM favourites WHERE user_id = @id) AS favourite_count,
+                                (SELECT COUNT(*) FROM ratings WHERE user_id = @id) AS rating_count
+                            FROM users u
+                            WHERE u.user_id = @id";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", userID);
+
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        if(reader.Read())
+                        {
+                            string username = reader.GetString(0);
+                            int mediaCount = reader.GetInt32(1);
+                            int favouriteCount = reader.GetInt32(2);
+                            int ratingCount = reader.GetInt32(3);
+
+                            return new UserProfileDTO(new User(username, userID, ""), mediaCount, favouriteCount, ratingCount);
+                        }
+                    }
+                }
+            }
+            return null;
         }
     }
 }

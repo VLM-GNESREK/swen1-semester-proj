@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Treasure_Bay.Classes;
+using Treasure_Bay.DTO;
 using Treasure_Bay.Repositories;
 
 namespace Treasure_Bay.Tests
@@ -63,6 +64,22 @@ namespace Treasure_Bay.Tests
         {
             var user = GetUserByID(userID);
             return user != null ? user.Favourites : new List<MediaEntry>();
+        }
+
+        public UserProfileDTO? GetUserStatistics(int userID) // Simulated statistics for completion of interface. Not testing actual statistics functionality here.
+        {
+            User? user = GetUserByID(userID);
+            
+            if (user == null)
+            {
+                return null;
+            }
+
+            int favouriteCount = user.Favourites.Count;
+            int mediaCount = 0;  
+            int ratingCount = 0;  
+
+            return new UserProfileDTO(user, mediaCount, favouriteCount, ratingCount);
         }
     }
 }

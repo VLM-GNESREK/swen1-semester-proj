@@ -67,5 +67,17 @@ namespace Treasure_Bay.Services
             List<MediaResponseDTO> favDTOs = favs.Select(entry => new MediaResponseDTO(entry)).ToList();
             return favDTOs;
         }
+
+        public UserProfileDTO? GetUserStatistics(int userID)
+        {
+            UserProfileDTO? userStats = _userRepository.GetUserStatistics(userID);
+
+            if(userStats == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            return userStats;
+        }
     }
 }

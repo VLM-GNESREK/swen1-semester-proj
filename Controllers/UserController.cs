@@ -175,14 +175,15 @@ namespace Treasure_Bay.Controllers
                     case "/api/users/profile":
                         if (method == "GET")
                         {
-                            User? user = Authenticate(req);
-                            if (user == null)
+                            try
                             {
-                                await SendResponseAsync(resp, $"Error 401: Unauthorised. Missing or invalid token.", 401);
+                                var userStats = _userService.GetUserStatistics(currentUser!.UserID);
+                                string jsonResponse = JsonConvert.SerializeObject(userStats);
+                                await SendResponseAsync(resp, jsonResponse, 200, "application/json");
                             }
-                            else
+                            catch(KeyNotFoundException)
                             {
-                                await SendResponseAsync(resp, $"Authenticated as: {user.Username}", 200);
+                                await SendResponseAsync(resp, $"Error 404: User not found.", 404);
                             }
                         }
                         else
