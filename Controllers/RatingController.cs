@@ -1,5 +1,6 @@
 // Controllers/RatingController.cs
 
+using System.Formats.Asn1;
 using System.Net;
 using Newtonsoft.Json;
 using Treasure_Bay.Classes;
@@ -119,9 +120,47 @@ namespace Treasure_Bay.Controllers
                     }
                     break;
                 default:  
-                    if(path.StartsWith("api/ratings/"))
+                    if(path.StartsWith("/api/ratings/like/"))
                     {
-                        string idSegment = path.Split('/').Last();
+                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
+                        if(!int.TryParse(idSegment, out int ratingID))
+                        {
+                            await SendResponseAsync(resp, "Error 400: Invalid Rating ID", 400); // Bad Request
+                            break;
+                        }
+
+                        switch(method)
+                        {
+                            case "POST":
+                                try
+                                {
+                                    _ratingService.LikeRating(ratingID, user.UserID);
+                                    await SendResponseAsync(resp, "Rating liked successfully.", 200); // OK
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, "Error 404: Rating not found.", 404); // Not Found
+                                }
+                                break;
+                            case "DELETE":
+                                try
+                                {
+                                    _ratingService.UnlikeRating(ratingID, user.UserID);
+                                    await SendResponseAsync(resp, "", 204); // No Content
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, "Error 404: Rating not found.", 404); // Not Found
+                                }
+                                break;
+                            default:
+                                await SendResponseAsync(resp, "Error 405: Method not allowed.", 405); // (Who's updating a rating?)
+                                break;
+                        }
+                    }
+                    else if(path.StartsWith("/api/ratings/"))
+                    {
+                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
                         if(!int.TryParse(idSegment, out int ratingID))
                         {
                             await SendResponseAsync(resp, "Error 400: Invalid Rating ID", 400); // Bad Request

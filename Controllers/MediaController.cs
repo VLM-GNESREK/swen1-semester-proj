@@ -118,7 +118,45 @@ namespace Treasure_Bay.Controllers
                         break;
                     }
                 default:
-                    if (path.StartsWith("/api/media/"))
+                    if(path.StartsWith("/api/media/favourites/"))
+                    {
+                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
+                        if (!int.TryParse(idSegment, out int mediaID))
+                        {
+                            await SendResponseAsync(resp, $"Error 400: Invalid media ID.", 400);
+                            break;
+                        }
+
+                        switch(method)
+                        {
+                            case "POST":
+                                try
+                                {
+                                    _mediaService.AddFavourite(user.UserID, mediaID);
+                                    await SendResponseAsync(resp, "", 204);
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
+                                }
+                                break;
+                            case "DELETE":
+                                try
+                                {
+                                    _mediaService.RemoveFavourite(user.UserID, mediaID);
+                                    await SendResponseAsync(resp, "", 204);
+                                }
+                                catch(KeyNotFoundException)
+                                {
+                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
+                                }
+                                break;
+                            default:
+                                await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
+                                break;
+                        }
+                    }
+                    else if (path.StartsWith("/api/media/"))
                     {
                         string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
                         if (int.TryParse(idSegment, out int mediaID))
@@ -182,44 +220,6 @@ namespace Treasure_Bay.Controllers
                         else
                         {
                             await SendResponseAsync(resp, $"Error 400: Invlid media ID.", 400);
-                        }
-                    }
-                    else if(path.StartsWith("/api/media/favourites/"))
-                    {
-                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
-                        if (!int.TryParse(idSegment, out int mediaID))
-                        {
-                            await SendResponseAsync(resp, $"Error 400: Invalid media ID.", 400);
-                            break;
-                        }
-
-                        switch(method)
-                        {
-                            case "POST":
-                                try
-                                {
-                                    _mediaService.AddFavourite(user.UserID, mediaID);
-                                    await SendResponseAsync(resp, "", 204);
-                                }
-                                catch(KeyNotFoundException)
-                                {
-                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
-                                }
-                                break;
-                            case "DELETE":
-                                try
-                                {
-                                    _mediaService.RemoveFavourite(user.UserID, mediaID);
-                                    await SendResponseAsync(resp, "", 204);
-                                }
-                                catch(KeyNotFoundException)
-                                {
-                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
-                                }
-                                break;
-                            default:
-                                await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
-                                break;
                         }
                     }
                     else

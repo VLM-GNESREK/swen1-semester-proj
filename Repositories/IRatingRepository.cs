@@ -12,5 +12,7 @@ namespace Treasure_Bay.Repositories
         void UpdateRating(Rating rating);
         void DeleteRating(Rating rating);
         Rating? GetRatingByID(int ratingID);
+        void AddLike(int ratingID, int userID);
+        void RemoveLike(int ratingID, int userID);
     }
 }

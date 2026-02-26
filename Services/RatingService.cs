@@ -92,5 +92,25 @@ namespace Treasure_Bay.Services
 
             _repo.DeleteRating(rating);
         }
+
+        public void LikeRating(int ratingID, int userID)
+        {
+            if(_repo.GetRatingByID(ratingID) == null)
+            {
+                throw new KeyNotFoundException("Rating not found.");
+            }
+
+            _repo.AddLike(ratingID, userID);
+        }
+
+        public void UnlikeRating(int ratingID, int userID)
+        {
+            if(_repo.GetRatingByID(ratingID) == null)
+            {
+                throw new KeyNotFoundException("Rating not found.");
+            }
+
+            _repo.RemoveLike(ratingID, userID);
+        }
     }
 }

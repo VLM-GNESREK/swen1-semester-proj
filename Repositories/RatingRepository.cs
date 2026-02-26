@@ -38,7 +38,8 @@ namespace Treasure_Bay.Repositories
                 var sql = @"
                             SELECT
                                 r.rating_id, r.star_value, r.comment, r.user_id, r.media_id,
-                                u.username, password_hash
+                                u.username, password_hash,
+                                (SELECT COUNT(*) FROM rating_likes WHERE rating_id = r.rating_id) AS like_count
                             FROM ratings r
                             JOIN users u ON r.user_id = u.user_id
                             WHERE r.media_id = @m";
@@ -60,6 +61,7 @@ namespace Treasure_Bay.Repositories
 
                             User user = new User(username, userID, pw_hash);
                             Rating rating = new Rating(ratingID, user, media, stars, comment);
+                            rating.Likes = Convert.ToInt32(reader.GetInt64(7));
                             ratings.Add(rating);
                         }
                     }
@@ -78,7 +80,8 @@ namespace Treasure_Bay.Repositories
                             SELECT
                                 r.rating_id, r.star_value, r.comment, r.media_id,
                                 m.title, m.description, m.release_year, m.user_id,
-                                u.username, u.password_hash
+                                u.username, u.password_hash,
+                                (SELECT COUNT(*) FROM rating_likes WHERE rating_id = r.rating_id) AS like_count
                             FROM ratings r
                             JOIN media m ON r.media_id = m.media_id
                             JOIN users u ON m.user_id = u.user_id
@@ -88,22 +91,26 @@ namespace Treasure_Bay.Repositories
                     cmd.Parameters.AddWithValue("u", reviewer.UserID);
                     using(var reader = cmd.ExecuteReader())
                     {
-                        int ratingID = reader.GetInt32(0);
-                        int stars = reader.GetInt32(1);
-                        string comment = reader.GetString(2);
-                        int mediaID = reader.GetInt32(3);
-                        string title = reader.GetString(4);
-                        string desc = reader.GetString(5);
-                        int r_year = reader.GetInt32(6);
-                        int userID = reader.GetInt32(7);
-                        string username = reader.GetString(8);
-                        string pw_hash = reader.GetString(9);
+                        while(reader.Read())
+                        {
+                            int ratingID = reader.GetInt32(0);
+                            int stars = reader.GetInt32(1);
+                            string comment = reader.GetString(2);
+                            int mediaID = reader.GetInt32(3);
+                            string title = reader.GetString(4);
+                            string desc = reader.GetString(5);
+                            int r_year = reader.GetInt32(6);
+                            int userID = reader.GetInt32(7);
+                            string username = reader.GetString(8);
+                            string pw_hash = reader.GetString(9);
 
-                        User user = new User(username, userID, pw_hash);
-                        MediaEntry media = new MediaEntry(mediaID, title, desc, r_year, user);
-                        Rating rating = new Rating(ratingID, reviewer, media, stars, comment);
+                            User user = new User(username, userID, pw_hash);
+                            MediaEntry media = new MediaEntry(mediaID, title, desc, r_year, user);
+                            Rating rating = new Rating(ratingID, reviewer, media, stars, comment);
+                            rating.Likes = Convert.ToInt32(reader.GetInt64(10));
 
-                        ratings.Add(rating);
+                            ratings.Add(rating);
+                        }
                     }
                 }
             }
@@ -151,7 +158,8 @@ namespace Treasure_Bay.Repositories
                             SELECT
                                 r.rating_id, r.star_value, r.comment, r.user_id, r.media_id,
                                 m.title, m.description, m.release_year, m.user_id,
-                                u.username, u.password_hash
+                                u.username, u.password_hash,
+                                (SELECT COUNT(*) FROM rating_likes WHERE rating_id = r.rating_id) AS like_count
                             FROM ratings r
                             JOIN media m ON r.media_id = m.media_id
                             JOIN users u ON r.user_id = u.user_id
@@ -166,7 +174,7 @@ namespace Treasure_Bay.Repositories
                         if(reader.Read())
                         {
                             // 0: rating_id is passed in
-                            int stars = reader.GetInt32(1);
+                            int stars = reader.GetInt32(1);          
                             string comment = reader.GetString(2);
                             int reviewerID = reader.GetInt32(3);
                             int mediaID = reader.GetInt32(4);
@@ -182,13 +190,46 @@ namespace Treasure_Bay.Repositories
                             User creatorPlaceholder = new User("Unknown", creatorID, "");
                             MediaEntry media = new MediaEntry(mediaID, title, desc, r_year, creatorPlaceholder);
 
-                            return new Rating(ratingID, reviewer, media, stars, comment);
+                            Rating rating = new Rating(ratingID, reviewer, media, stars, comment);
+                            rating.Likes = Convert.ToInt32(reader.GetInt64(11));
+
+                            return rating;
                         }
                         else
                         {
                             return null;
                         }
                     }
+                }
+            }
+        }
+
+        public void AddLike(int ratingID, int userID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "INSERT INTO rating_likes (rating_id, user_id) VALUES (@r, @u) ON CONFLICT DO NOTHING";
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("r", ratingID);
+                    cmd.Parameters.AddWithValue("u", userID);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void RemoveLike(int ratingID, int userID)
+        {
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = "DELETE FROM rating_likes WHERE rating_id = @r AND user_id = @u";
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("r", ratingID);
+                    cmd.Parameters.AddWithValue("u", userID);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

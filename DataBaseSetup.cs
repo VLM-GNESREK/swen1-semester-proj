@@ -55,7 +55,8 @@ public class DataBaseSetup
                     media_id INTEGER NOT NULL REFERENCES media(media_id) ON DELETE CASCADE,
                     star_value INTEGER NOT NULL,
                     comment TEXT,
-                    UNIQUE(user_id, media_id)
+                    UNIQUE(user_id, media_id),
+                    is_approved BOOLEAN DEFAULT FALSE
                 );
             ";
 
@@ -70,6 +71,21 @@ public class DataBaseSetup
                     user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
                     media_id INTEGER NOT NULL REFERENCES media(media_id) ON DELETE CASCADE,
                     PRIMARY KEY (user_id, media_id)
+                );
+            ";
+
+
+            using(var cmd = new NpgsqlCommand(sql, conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+
+            sql = @"
+                CREATE TABLE IF NOT EXISTS rating_likes
+                (
+                    user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+                    rating_id INTEGER NOT NULL REFERENCES ratings(rating_id) ON DELETE CASCADE,
+                    PRIMARY KEY (user_id, rating_id)
                 );
             ";
 

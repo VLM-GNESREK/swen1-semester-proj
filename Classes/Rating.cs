@@ -12,7 +12,7 @@ namespace Treasure_Bay.Classes
         public int StarValue { get; set; }
         public string Comment { get; set; }
         public DateTime Timestamp { get; private set; }
-        public int Likes { get; private set; }
+        public int Likes { get; set; }
         public bool ComVis { get; private set; }
         // connecty bits
         public User Reviewer { get; private set; }
@@ -38,16 +38,6 @@ namespace Treasure_Bay.Classes
         public void ConfirmComment()
         {
             this.ComVis = true;
-        }
-
-        public void AddLike()
-        {
-            this.Likes++;
-        }
-
-        public void Removeike()
-        {
-            this.Likes--;
         }
     }
 }
