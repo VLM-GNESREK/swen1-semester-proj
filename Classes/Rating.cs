@@ -13,7 +13,7 @@ namespace Treasure_Bay.Classes
         public string Comment { get; set; }
         public DateTime Timestamp { get; private set; }
         public int Likes { get; set; }
-        public bool ComVis { get; private set; }
+        public bool ComVis { get; set; }
         // connecty bits
         public User Reviewer { get; private set; }
         public MediaEntry? Media { get; private set; }

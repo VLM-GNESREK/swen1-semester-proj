@@ -54,7 +54,15 @@ namespace Treasure_Bay.Services
 
         public List<Rating> GetRatingsByMedia(MediaEntry media)
         {
-            return _repo.GetRatingsByMediaID(media);
+            List<Rating> ratings = _repo.GetRatingsByMediaID(media);
+            foreach(var rating in ratings)
+            {
+                if(!rating.ComVis)
+                {
+                    rating.Comment = "[Private Comment]";
+                }
+            }
+            return ratings;
         }
 
         public void UpdateRating(User user, int ratingId, int stars, string comment)
@@ -111,6 +119,16 @@ namespace Treasure_Bay.Services
             }
 
             _repo.RemoveLike(ratingID, userID);
+        }
+
+        public void SetCommentVisibility(int ratingID, bool isVisible)
+        {
+            if(_repo.GetRatingByID(ratingID) == null)
+            {
+                throw new KeyNotFoundException("Rating not found.");
+            }
+
+            _repo.SetCommentVisibility(ratingID, isVisible);
         }
     }
 }

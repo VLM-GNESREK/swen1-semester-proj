@@ -14,5 +14,6 @@ namespace Treasure_Bay.Repositories
         Rating? GetRatingByID(int ratingID);
         void AddLike(int ratingID, int userID);
         void RemoveLike(int ratingID, int userID);
+        void SetCommentVisibility(int ratingID, bool isVisible);
     }
 }

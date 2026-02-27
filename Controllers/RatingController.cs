@@ -14,6 +14,10 @@ namespace Treasure_Bay.Controllers
         public string? comment { get; set; }
         public int media_id { get; set; }
     }
+    public class CommentVisibilityRequest
+    {
+        public bool isVisible { get; set; }
+    }
     public class RatingController : BaseController
     {
         
@@ -154,8 +158,47 @@ namespace Treasure_Bay.Controllers
                                 }
                                 break;
                             default:
-                                await SendResponseAsync(resp, "Error 405: Method not allowed.", 405); // (Who's updating a rating?)
+                                await SendResponseAsync(resp, "Error 405: Method not allowed.", 405); // Either you like or you don't, no other options (for now)
                                 break;
+                        }
+                    }
+                    else if(path.StartsWith("/api/ratings/visibility/"))
+                    {
+                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
+                        if(!int.TryParse(idSegment, out int ratingID))
+                        {
+                            await SendResponseAsync(resp, "Error 400: Invalid Rating ID", 400); // Bad Request
+                            break;
+                        }
+
+                        if(method == "PUT")
+                        {
+                            using(var reader = new StreamReader(req.InputStream, req.ContentEncoding))
+                            {
+                                requestBody = await reader.ReadToEndAsync();
+                            }
+
+                            CommentVisibilityRequest? updateData = JsonConvert.DeserializeObject<CommentVisibilityRequest>(requestBody);
+                            
+                            if(updateData == null)
+                            {
+                                await SendResponseAsync(resp, "Error 400: 'isVisible' field is required.", 400); // Bad Request
+                                break;
+                            }
+
+                            try
+                            {
+                                _ratingService.SetCommentVisibility(ratingID, updateData.isVisible);
+                                await SendResponseAsync(resp, "Comment visibility updated.", 200); // OK
+                            }
+                            catch(KeyNotFoundException)
+                            {
+                                await SendResponseAsync(resp, "Error 404: Rating not found.", 404); // Not Found
+                            }
+                        }
+                        else
+                        {
+                            await SendResponseAsync(resp, "Error 405: Method not allowed.", 405);
                         }
                     }
                     else if(path.StartsWith("/api/ratings/"))

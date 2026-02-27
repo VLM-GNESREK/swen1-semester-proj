@@ -25,7 +25,7 @@ namespace Treasure_Bay.Repositories
             using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
             {
                 conn.Open();
-                var sql = "DROP TABLE IF EXISTS favourites, ratings, media, users CASCADE;";
+                var sql = "DROP TABLE IF EXISTS favourites, ratings, media, users, rating_likes CASCADE;";
 
                 using(var cmd = new NpgsqlCommand(sql, conn))
                 {

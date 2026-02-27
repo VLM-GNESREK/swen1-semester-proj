@@ -59,5 +59,10 @@ namespace Treasure_Bay.Tests
         {
             // Left blank intentionally, see above
         }
+
+        public void SetCommentVisibility(int ratingID, bool isVisible)
+        {
+            // Left blank intentionally, see above
+        }
     }
 }
