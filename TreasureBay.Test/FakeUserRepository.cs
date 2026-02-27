@@ -81,5 +81,14 @@ namespace Treasure_Bay.Tests
 
             return new UserProfileDTO(user, mediaCount, favouriteCount, ratingCount);
         }
+
+        public List<UserLeaderBoardEntryDTO> LeaderBoard(int limit)
+        {
+            return _fakeDB
+                .OrderByDescending(u => u.Favourites.Count)
+                .Take(limit)
+                .Select(u => new UserLeaderBoardEntryDTO(new User(u.Username, u.UserID, ""), u.Favourites.Count)) 
+                .ToList();
+        }
     }
 }

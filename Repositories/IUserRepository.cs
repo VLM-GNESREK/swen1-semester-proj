@@ -14,5 +14,6 @@ namespace Treasure_Bay.Repositories
         void RemoveFavourite(int userID, int mediaID);
         List<MediaEntry> GetFavourites(int userID);
         UserProfileDTO? GetUserStatistics(int userID);
+        List<UserLeaderBoardEntryDTO> LeaderBoard(int limit);
     }
 }

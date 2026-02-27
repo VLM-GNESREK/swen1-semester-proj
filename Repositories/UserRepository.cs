@@ -192,5 +192,52 @@ namespace Treasure_Bay.Repositories
             }
             return null;
         }
+
+        public List<UserLeaderBoardEntryDTO> LeaderBoard(int limit)
+        {
+            List<UserLeaderBoardEntryDTO> leaderboard = new List<UserLeaderBoardEntryDTO>();
+
+            using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
+            {
+                conn.Open();
+                var sql = @"
+                            WITH user_stats AS 
+                            (
+                                SELECT
+                                    u.username, u.user_id,
+                                    (SELECT COUNT(*) FROM media WHERE user_id = u.user_id) AS media_count,
+                                    (SELECT COUNT(*) FROM favourites WHERE user_id = u.user_id) AS favourite_count,
+                                    (SELECT COUNT(*) FROM ratings WHERE user_id = u.user_id) AS rating_count
+                                FROM users u
+                            )
+                            SELECT 
+                                user_id,
+                                username,
+                                media_count,
+                                favourite_count,
+                                rating_count,
+                                (media_count * 3 + favourite_count * 2 + rating_count) AS rating
+                            FROM user_stats
+                            ORDER BY rating DESC, username ASC
+                            limit @limit";
+
+                using(var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("limit", limit);
+                    using(var reader = cmd.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            int userID = reader.GetInt32(0);
+                            string username = reader.GetString(1);
+                            int rating = Convert.ToInt32(reader.GetInt64(5));
+
+                            leaderboard.Add(new UserLeaderBoardEntryDTO(new User(username, userID, ""), rating));
+                        }
+                    }
+                }
+            }
+            return leaderboard;
+        }
     }
 }

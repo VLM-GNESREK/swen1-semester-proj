@@ -79,5 +79,20 @@ namespace Treasure_Bay.Services
 
             return userStats;
         }
+
+        public List<UserLeaderBoardEntryDTO> GetLeaderBoard(int limit)
+        {
+            if(limit <= 0)
+            {
+                throw new ArgumentException("Limit must be greater than 0.");
+            }
+
+            if(limit > 100)
+            {
+                throw new ArgumentException("Limit cannot exceed 100.");
+            }
+
+            return _userRepository.LeaderBoard(limit);
+        }
     }
 }

@@ -120,6 +120,29 @@ namespace Treasure_Bay.Controllers
                                 break;
                         }
                         break;
+                    case "/api/users/leaderboard":
+                        if(method == "GET")
+                        {
+                            if(!int.TryParse(req.QueryString["limit"], out int limit))
+                            {
+                                limit = 10;
+                            }
+                            try
+                            {
+                                List<UserLeaderBoardEntryDTO> leaders = _userService.GetLeaderBoard(limit);
+                                string jsonResponse = JsonConvert.SerializeObject(leaders);
+                                await SendResponseAsync(resp, jsonResponse, 200, "application/json");
+                            }
+                            catch(ArgumentException ex)
+                            {
+                                await SendResponseAsync(resp, $"Error 400: {ex.Message}", 400);
+                            }
+                        }
+                        else
+                        {
+                            await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
+                        }
+                        break;
                     case "/api/users/favorites":
                     case "/api/users/favourites":
                         if (method == "GET")
@@ -155,7 +178,7 @@ namespace Treasure_Bay.Controllers
                                 }
                                 catch(PostgresException ex) when (ex.SqlState == "23505")
                                 {
-                                    await SendResponseAsync(resp, $"Error 409: Already in favourites.", 409);
+                                    await SendResponseAsync(resp, $"Error 409: Already in favourites.", 409); // Conflict
                                 }
                             }
                             catch (JsonException)
