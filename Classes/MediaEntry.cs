@@ -19,6 +19,7 @@ namespace Treasure_Bay.Classes
         public string Description { get; set; }
         public int ReleaseYear { get; set; }
         public int AgeRestriction { get; set; }
+        public double AverageRating { get; set;}
         // Shiny types (collections)
         public User Creator { get; private set; }
         public List<Rating> Ratings { get; private set; }

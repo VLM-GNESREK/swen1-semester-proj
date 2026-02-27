@@ -32,22 +32,10 @@ namespace Treasure_Bay.Services
             return newRating;
         }
 
-        public double GetAverageRating(MediaEntry media)
-        {
-            List<Rating> ratings = _repo.GetRatingsByMediaID(media);
-
-            if(ratings.Count == 0)
-            {
-                return 0;
-            }
-
-            return ratings.Average(r => r.StarValue);
-        }
-
         public List<MediaEntry> GetTopRatedMedia(List<MediaEntry> mediaList, int count)
         {
             return mediaList
-                            .OrderByDescending(m => GetAverageRating(m))
+                            .OrderByDescending(m => m.AverageRating)
                             .Take(count)
                             .ToList();          
         }

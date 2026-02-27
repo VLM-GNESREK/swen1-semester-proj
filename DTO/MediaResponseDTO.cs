@@ -13,6 +13,7 @@ namespace Treasure_Bay.DTO
         public string Title { get; set; }
         public string Description { get; set; }
         public int ReleaseYear { get; set; }
+        double AverageRating { get; set; }
         public UserResponseDTO? Creator { get; set; }
 
         // ## CONSTRUCTOR ##
@@ -23,6 +24,7 @@ namespace Treasure_Bay.DTO
             Title = media.Title;
             Description = media.Description;
             ReleaseYear = media.ReleaseYear;
+            AverageRating = media.AverageRating;
 
             if(media.Creator != null)
             {

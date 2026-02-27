@@ -40,7 +40,8 @@ namespace Treasure_Bay.Repositories
                 conn.Open();
                 var sql = @"SELECT 
                                 m.title, m.description, m.release_year, m.user_id,
-                                u.username, u.password_hash
+                                u.username, u.password_hash,
+                                COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM media m 
                             JOIN users u ON m.user_id = u.user_id
                             WHERE m.media_id = @m";
@@ -59,10 +60,12 @@ namespace Treasure_Bay.Repositories
                             int userID = reader.GetInt32(3);
                             string username = reader.GetString(4);
                             string dbHash = reader.GetString(5);
+                            double avgRating = reader.GetDouble(6);
 
                             User user = new User(username, userID, dbHash);
 
                             MediaEntry foundMedia = new MediaEntry(id, title, desc, releaseYear, user);
+                            foundMedia.AverageRating = avgRating;
                             returnMedia = foundMedia;
                         }
                     }
@@ -114,7 +117,8 @@ namespace Treasure_Bay.Repositories
                 conn.Open();
                 var sql = @"SELECT 
                                 m.media_id, m.title, m.description, m.release_year, m.user_id,
-                                u.username, u.password_hash
+                                u.username, u.password_hash,
+                                COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM media m
                             JOIN users u ON m.user_id = u.user_id";
                 
@@ -126,6 +130,7 @@ namespace Treasure_Bay.Repositories
                         int userID = reader.GetInt32(4);
                         string username = reader.GetString(5);
                         string dbHash = reader.GetString(6);
+                        double avgRating = reader.GetDouble(7);
 
                         User user = new User(username, userID, dbHash);
 
@@ -135,7 +140,7 @@ namespace Treasure_Bay.Repositories
                         int releaseYear = reader.GetInt32(3);
 
                         MediaEntry media = new MediaEntry(mediaID, title, desc, releaseYear, user);
-
+                        media.AverageRating = avgRating;
                         mediaList.Add(media);
                     }
                 }
@@ -153,7 +158,8 @@ namespace Treasure_Bay.Repositories
                 conn.Open();
                 var sqlBuilder = new StringBuilder(@"SELECT
                                                         m.media_id, m.title, m.description, m.release_year, m.user_id,
-                                                        u.username, u.password_hash
+                                                        u.username, u.password_hash,
+                                                        COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                                                     FROM media m
                                                     JOIN users u ON m.user_id = u.user_id
                                                     WHERE 1=1");
@@ -196,6 +202,7 @@ namespace Treasure_Bay.Repositories
                             int userID = reader.GetInt32(4);
                             string username = reader.GetString(5);
                             string dbHash = reader.GetString(6);
+                            double avgRating = reader.GetDouble(7);
 
                             User user = new User(username, userID, dbHash);
 
@@ -205,7 +212,7 @@ namespace Treasure_Bay.Repositories
                             int releaseYear = reader.GetInt32(3);
 
                             MediaEntry media = new MediaEntry(mediaID, dbTitle, desc, releaseYear, user);
-
+                            media.AverageRating = avgRating;
                             mediaList.Add(media);
                         }
                     }
@@ -255,7 +262,8 @@ namespace Treasure_Bay.Repositories
                 conn.Open();
                 var sql = @"SELECT 
                                 m.media_id, m.title, m.description, m.release_year,
-                                u.user_id AS creator_id, u.username, u.password_hash
+                                u.user_id AS creator_id, u.username, u.password_hash,
+                                COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM favourites f
                             JOIN media m ON f.media_id = m.media_id
                             JOIN users u ON m.user_id = u.user_id
@@ -277,10 +285,11 @@ namespace Treasure_Bay.Repositories
                             int creatorID = reader.GetInt32(4);
                             string creatorUsername = reader.GetString(5);
                             string creatorHash = reader.GetString(6);
+                            double avgRating = reader.GetDouble(7);
 
                             User creator = new User(creatorUsername, creatorID, creatorHash);
                             MediaEntry media = new MediaEntry(mediaID, title, desc, releaseYear, creator);
-
+                            media.AverageRating = avgRating;
                             favourites.Add(media);
                         }
                     }
