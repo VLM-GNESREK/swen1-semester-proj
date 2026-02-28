@@ -22,11 +22,17 @@ namespace Treasure_Bay.Services
 
         public Rating CreateRating(User user, MediaEntry media, int stars, string comment)
         {
+            if (stars < 1 || stars > 5)
+            {
+                throw new ArgumentOutOfRangeException(nameof(stars), "Stars must be between 1 and 5.");
+            }
+
             var list = _repo.GetRatingsByMediaID(media);
             if(list.FirstOrDefault(r => r.Reviewer.UserID == user.UserID) != null)
             {
                 throw new InvalidOperationException("User has already rated this media.");
             }
+            
             int newID = _repo.CreateRating(user, media, stars, comment);
             Rating newRating = new Rating(newID, user, media, stars, comment);
             return newRating;
@@ -61,6 +67,12 @@ namespace Treasure_Bay.Services
             {
                 throw new KeyNotFoundException("Rating not found.");
             }
+
+            if (stars < 1 || stars > 5)
+            {
+                throw new ArgumentOutOfRangeException(nameof(stars), "Stars must be between 1 and 5.");
+            }
+
 
             if(rating.Reviewer.UserID != user.UserID)
             {

@@ -59,16 +59,16 @@ namespace Treasure_Bay.Tests
             MediaEntry m2 = new MediaEntry(2, "Media2", "desc", 2005, testUser);
             MediaEntry m3 = new MediaEntry(3, "Media3", "desc", 2006, testUser);
 
-            _fakeRepo.CreateRating(testUser, m1, 5, "Excellent!");
-            _fakeRepo.CreateRating(testUser, m2, 3, "Okay.");
-            _fakeRepo.CreateRating(testUser, m3, 1, "Terrible!");
+            m1.AverageRating = 4.5;
+            m2.AverageRating = 5.0;
+            m3.AverageRating = 2.0;
 
             List<MediaEntry> allMedia = new List<MediaEntry> { m3, m1, m2 };
 
             List<MediaEntry> sortedList = _ratingService.GetTopRatedMedia(allMedia, 3);
 
-            Assert.That(sortedList[0], Is.EqualTo(m1));
-            Assert.That(sortedList[0].Title, Is.EqualTo("Media1"));
+            Assert.That(sortedList[0], Is.EqualTo(m2));
+            Assert.That(sortedList[0].Title, Is.EqualTo("Media2"));
             Assert.That(sortedList[2], Is.EqualTo(m3));
         }
 
@@ -159,5 +159,47 @@ namespace Treasure_Bay.Tests
                 _ratingService.DeleteRating(ratingID, hacker);
             });
         }
+
+        [Test]
+        public void DeleteRating_ShouldThrowException_WhenRatingNotFound()
+        {
+            User user = new User("TestUser", 1, "hash");
+
+            var ex = Assert.Throws<KeyNotFoundException>(() =>
+            {
+                _ratingService.DeleteRating(9999, user);
+            });
+
+            Assert.That(ex.Message, Is.EqualTo("Rating not found."));
+        }
+
+        [Test]
+        public void CreateRating_ShouldThrowException_WhenStarsAreOutOfBounds()
+        {
+            User user = new User("TestUser", 1, "hash");
+            MediaEntry media = new MediaEntry(1, "Media", "desc", 2020, user);
+
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                _ratingService.CreateRating(user, media, 6, "Too many stars");
+            });
+
+            Assert.That(ex.Message, Does.Contain("Stars must be between 1 and 5"));
+        }
+
+        [Test]
+        public void SetCommentVisibility_ShouldUpdateVisibility()
+        {
+            User user = new User("TestUser", 1, "hash");
+            MediaEntry media = new MediaEntry(1, "Media", "desc", 2020, user);
+            
+            _fakeRepo.CreateRating(user, media, 4, "A standard review");
+            int ratingID = 1;
+
+            _ratingService.SetCommentVisibility(ratingID, true);
+
+            var updatedRating = _fakeRepo.GetRatingByID(ratingID);
+            Assert.That(updatedRating?.ComVis, Is.True);
+}
     }
 }

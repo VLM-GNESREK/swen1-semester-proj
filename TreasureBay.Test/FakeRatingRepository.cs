@@ -50,17 +50,22 @@ namespace Treasure_Bay.Tests
             return _fakeRatingDB.FirstOrDefault(r => r.RatingID == ratingID);
         }
 
+        public void SetCommentVisibility(int ratingID, bool isVisible)
+        {
+            Rating? rating = GetRatingByID(ratingID);
+            if (rating != null)
+            {
+                rating.ComVis = isVisible;
+                UpdateRating(rating);
+            }
+        }
+
         public void AddLike(int ratingID, int userID) // Not tested, just here for implementation of interface
         {
             
         }
 
         public void RemoveLike(int ratingID, int userID)
-        {
-            // Left blank intentionally, see above
-        }
-
-        public void SetCommentVisibility(int ratingID, bool isVisible)
         {
             // Left blank intentionally, see above
         }

@@ -66,12 +66,6 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
-                        if (ratingData.stars < 1 || ratingData.stars > 5)
-                        {
-                            await SendResponseAsync(resp, "Error 400: Stars must be between 1 and 5.", 400); // Bad Request
-                            break;
-                        }
-
                         MediaEntry? media = _mediaService.FindMedia(ratingData.media_id);
 
                         if (media == null)
@@ -90,6 +84,10 @@ namespace Treasure_Bay.Controllers
                         catch (InvalidOperationException ex)
                         {
                             await SendResponseAsync(resp, $"Error 409: {ex.Message}", 409);
+                        }
+                        catch (ArgumentOutOfRangeException ex)
+                        {
+                            await SendResponseAsync(resp, $"Error 400: {ex.Message}", 400);
                         }
                     }
                     else if(method == "GET")
@@ -235,15 +233,9 @@ namespace Treasure_Bay.Controllers
                                 }
                                 var updateData = JsonConvert.DeserializeObject<RatingCreateRequest>(requestBody);
 
-                                if(updateData == null || updateData.stars < 1 || updateData.stars > 5)
-                                {
-                                    await SendResponseAsync(resp, "Error 400: Valid Stars (1-5) required.", 400); // Bad Request
-                                    break;
-                                }
-
                                 try
                                 {
-                                    _ratingService.UpdateRating(user, ratingID, updateData.stars, updateData.comment ?? "");
+                                    _ratingService.UpdateRating(user, ratingID, updateData!.stars, updateData.comment ?? "");
                                     await SendResponseAsync(resp, "Rating updated.", 200); // OK
                                 }
                                 catch(KeyNotFoundException)
@@ -253,6 +245,10 @@ namespace Treasure_Bay.Controllers
                                 catch(UnauthorizedAccessException)
                                 {
                                     await SendResponseAsync(resp, "Error 403: Not authorised.", 403); // Forbidden (Not Owner)
+                                }
+                                catch(ArgumentOutOfRangeException ex)
+                                {
+                                    await SendResponseAsync(resp, $"Error 400: {ex.Message}", 400); // Bad Request
                                 }
                                 break;
 
