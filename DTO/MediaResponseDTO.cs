@@ -13,7 +13,10 @@ namespace Treasure_Bay.DTO
         public string Title { get; set; }
         public string Description { get; set; }
         public int ReleaseYear { get; set; }
-        double AverageRating { get; set; }
+        public string AverageRating { get; set; }
+        public int AgeRestriction { get; set; }
+        public List<string> Genres { get; set; }
+        public string Type { get; set; }
         public UserResponseDTO? Creator { get; set; }
 
         // ## CONSTRUCTOR ##
@@ -24,7 +27,19 @@ namespace Treasure_Bay.DTO
             Title = media.Title;
             Description = media.Description;
             ReleaseYear = media.ReleaseYear;
-            AverageRating = media.AverageRating;
+            
+            if(media.AverageRating == 0.0)
+            {
+                AverageRating = "Unrated";
+            }
+            else
+            {
+                AverageRating = media.AverageRating.ToString("0.0");
+            }
+
+            Type = media.Type.ToString();
+            Genres = media.Genres;
+            AgeRestriction = media.AgeRestriction;
 
             if(media.Creator != null)
             {

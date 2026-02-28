@@ -8,7 +8,8 @@ namespace Treasure_Bay.Classes
     {
         Movie,
         Series,
-        Game
+        Game,
+        Unknown
     }
     public class MediaEntry
     {

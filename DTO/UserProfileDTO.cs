@@ -10,7 +10,7 @@ namespace Treasure_Bay.DTO
         public int UserID { get; set; }
         public int MediaCount { get; set; }
         public int FavouriteCount { get; set; }
-        public int ratingCount { get; set; }
+        public int RatingCount { get; set; }
 
         public UserProfileDTO(User user, int mediaCount, int favouriteCount, int ratingCount)
         {
@@ -18,7 +18,7 @@ namespace Treasure_Bay.DTO
             this.UserID = user.UserID;
             this.MediaCount = mediaCount;
             this.FavouriteCount = favouriteCount;
-            this.ratingCount = ratingCount;
+            this.RatingCount = ratingCount;
         }
     }
 }

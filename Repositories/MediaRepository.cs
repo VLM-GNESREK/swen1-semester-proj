@@ -39,7 +39,7 @@ namespace Treasure_Bay.Repositories
             {
                 conn.Open();
                 var sql = @"SELECT 
-                                m.title, m.description, m.release_year, m.user_id,
+                                m.title, m.description, m.release_year, m.user_id, m.media_type, m.genre, m.age_restriction,
                                 u.username, u.password_hash,
                                 COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM media m 
@@ -58,14 +58,21 @@ namespace Treasure_Bay.Repositories
                             string desc = reader.IsDBNull(1) ? "" : reader.GetString(1);
                             int releaseYear = reader.GetInt32(2);
                             int userID = reader.GetInt32(3);
-                            string username = reader.GetString(4);
-                            string dbHash = reader.GetString(5);
-                            double avgRating = reader.GetDouble(6);
+                            string mediaType = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
+                            string genre = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                            int ageRestriction = reader.IsDBNull(6) ? 0 : reader.GetInt32(6);
+                            
+                            string username = reader.GetString(7);
+                            string dbHash = reader.GetString(8);
+                            double avgRating = reader.GetDouble(9);
 
                             User user = new User(username, userID, dbHash);
 
                             MediaEntry foundMedia = new MediaEntry(id, title, desc, releaseYear, user);
                             foundMedia.AverageRating = avgRating;
+                            foundMedia.Type = Enum.Parse<MediaType>(mediaType);
+                            foundMedia.Genres = string.IsNullOrEmpty(genre) ? new List<string>() : genre.Split(',').ToList();
+                            foundMedia.AgeRestriction = ageRestriction;
                             returnMedia = foundMedia;
                         }
                     }
@@ -116,7 +123,7 @@ namespace Treasure_Bay.Repositories
             {
                 conn.Open();
                 var sql = @"SELECT 
-                                m.media_id, m.title, m.description, m.release_year, m.user_id,
+                                m.media_id, m.title, m.description, m.release_year, m.user_id, m.media_type, m.genre, m.age_restriction,
                                 u.username, u.password_hash,
                                 COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM media m
@@ -128,9 +135,13 @@ namespace Treasure_Bay.Repositories
                     while(reader.Read())
                     {
                         int userID = reader.GetInt32(4);
-                        string username = reader.GetString(5);
-                        string dbHash = reader.GetString(6);
-                        double avgRating = reader.GetDouble(7);
+                        string mediaType = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
+                        string genre = reader.IsDBNull(6) ? "" : reader.GetString(6);
+                        int ageRestriction = reader.IsDBNull(7) ? 0 : reader.GetInt32(7);
+                        
+                        string username = reader.GetString(8);
+                        string dbHash = reader.GetString(9);
+                        double avgRating = reader.GetDouble(10);
 
                         User user = new User(username, userID, dbHash);
 
@@ -141,6 +152,9 @@ namespace Treasure_Bay.Repositories
 
                         MediaEntry media = new MediaEntry(mediaID, title, desc, releaseYear, user);
                         media.AverageRating = avgRating;
+                        media.Type = Enum.Parse<MediaType>(mediaType);
+                        media.Genres = string.IsNullOrEmpty(genre) ? new List<string>() : genre.Split(',').ToList();
+                        media.AgeRestriction = ageRestriction;
                         mediaList.Add(media);
                     }
                 }
@@ -157,7 +171,7 @@ namespace Treasure_Bay.Repositories
             {
                 conn.Open();
                 var sqlBuilder = new StringBuilder(@"SELECT
-                                                        m.media_id, m.title, m.description, m.release_year, m.user_id,
+                                                        m.media_id, m.title, m.description, m.release_year, m.user_id, m.media_type, m.genre, m.age_restriction,
                                                         u.username, u.password_hash,
                                                         COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                                                     FROM media m
@@ -200,9 +214,12 @@ namespace Treasure_Bay.Repositories
                         while(reader.Read())
                         {
                             int userID = reader.GetInt32(4);
-                            string username = reader.GetString(5);
-                            string dbHash = reader.GetString(6);
-                            double avgRating = reader.GetDouble(7);
+                            string mediaType = reader.IsDBNull(5) ? "Unknown" : reader.GetString(5);
+                            string genres = reader.IsDBNull(6) ? "" : reader.GetString(6);
+                            int ageRestriction = reader.IsDBNull(7) ? 0 : reader.GetInt32(7);
+                            string username = reader.GetString(8);
+                            string dbHash = reader.GetString(9);
+                            double avgRating = reader.GetDouble(10);
 
                             User user = new User(username, userID, dbHash);
 
@@ -213,6 +230,9 @@ namespace Treasure_Bay.Repositories
 
                             MediaEntry media = new MediaEntry(mediaID, dbTitle, desc, releaseYear, user);
                             media.AverageRating = avgRating;
+                            media.Type = Enum.Parse<MediaType>(mediaType);
+                            media.Genres = string.IsNullOrEmpty(genres) ? new List<string>() : genres.Split(',').ToList();
+                            media.AgeRestriction = ageRestriction;
                             mediaList.Add(media);
                         }
                     }
@@ -261,7 +281,7 @@ namespace Treasure_Bay.Repositories
             {
                 conn.Open();
                 var sql = @"SELECT 
-                                m.media_id, m.title, m.description, m.release_year,
+                                m.media_id, m.title, m.description, m.release_year, m.media_type, m.genre, m.age_restriction,
                                 u.user_id AS creator_id, u.username, u.password_hash,
                                 COALESCE((SELECT AVG(star_value) FROM ratings WHERE media_id = m.media_id), 0)::float8 AS avg_rating
                             FROM favourites f
@@ -281,14 +301,20 @@ namespace Treasure_Bay.Repositories
                             string title = reader.GetString(1);
                             string desc = reader.IsDBNull(2) ? "" : reader.GetString(2);
                             int releaseYear = reader.GetInt32(3);
+                            string mediaType = reader.IsDBNull(4) ? "Unknown" : reader.GetString(4);
+                            string genre = reader.IsDBNull(5) ? "" : reader.GetString(5);
+                            int ageRestriction = reader.IsDBNull(6) ? 0 : reader.GetInt32(6);
 
-                            int creatorID = reader.GetInt32(4);
-                            string creatorUsername = reader.GetString(5);
-                            string creatorHash = reader.GetString(6);
-                            double avgRating = reader.GetDouble(7);
+                            int creatorID = reader.GetInt32(7);
+                            string creatorUsername = reader.GetString(8);
+                            string creatorHash = reader.GetString(9);
+                            double avgRating = reader.GetDouble(10);
 
                             User creator = new User(creatorUsername, creatorID, creatorHash);
                             MediaEntry media = new MediaEntry(mediaID, title, desc, releaseYear, creator);
+                            media.Type = Enum.Parse<MediaType>(mediaType);
+                            media.Genres = string.IsNullOrEmpty(genre) ? new List<string>() : genre.Split(',').ToList();
+                            media.AgeRestriction = ageRestriction;
                             media.AverageRating = avgRating;
                             favourites.Add(media);
                         }

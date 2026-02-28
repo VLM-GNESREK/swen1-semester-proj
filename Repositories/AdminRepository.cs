@@ -11,7 +11,7 @@ namespace Treasure_Bay.Repositories
             using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
             {
                 conn.Open();
-                var sql = "TRUNCATE TABLE users, media, ratings RESTART IDENTITY CASCADE;";
+                var sql = "TRUNCATE TABLE users, media, ratings, favourites, rating_likes RESTART IDENTITY CASCADE;";
 
                 using(var cmd = new NpgsqlCommand(sql, conn))
                 {

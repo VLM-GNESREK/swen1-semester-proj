@@ -14,10 +14,10 @@ namespace Treasure_Bay.Controllers
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public int ReleaseYear { get; set; }
+        public int? ReleaseYear { get; set; }
         public string? MediaType { get; set; }
         public List<string>? Genres { get; set; }
-        public int AgeRestriction { get; set; }
+        public int? AgeRestriction { get; set; }
     }
     public class MediaController : BaseController
     {
@@ -71,14 +71,14 @@ namespace Treasure_Bay.Controllers
                             break;
                         }
 
-                        var newMedia = _mediaService.CreateMedia
+                        MediaEntry newMedia = _mediaService.CreateMedia
                                                     (
                                                         mediaData.Title, 
                                                         mediaData.Description, 
-                                                        mediaData.ReleaseYear, 
+                                                        mediaData.ReleaseYear ?? 0, 
                                                         parsedType,
                                                         mediaData.Genres ?? new List<string>(),
-                                                        mediaData.AgeRestriction,
+                                                        mediaData.AgeRestriction ?? 0,
                                                         user
                                                     );
                         string jsonResponse = JsonConvert.SerializeObject(new MediaResponseDTO(newMedia));
@@ -207,7 +207,8 @@ namespace Treasure_Bay.Controllers
 
                                     media.Title = mediaData.Title;
                                     media.Description = mediaData.Description ?? media.Description;
-                                    media.ReleaseYear = mediaData.ReleaseYear;
+                                    media.ReleaseYear = mediaData.ReleaseYear ?? media.ReleaseYear;
+                                    media.AgeRestriction = mediaData.AgeRestriction ?? media.AgeRestriction;
                                     _mediaService.UpdateMedia(media);
                                     string updatedJsonResponse = JsonConvert.SerializeObject(new MediaResponseDTO(media));
                                     await SendResponseAsync(resp, updatedJsonResponse, 200, "application/json; charset=utf-8");
