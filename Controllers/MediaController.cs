@@ -81,7 +81,7 @@ namespace Treasure_Bay.Controllers
                                                         mediaData.AgeRestriction,
                                                         user
                                                     );
-                        string jsonResponse = JsonConvert.SerializeObject(newMedia);
+                        string jsonResponse = JsonConvert.SerializeObject(new MediaResponseDTO(newMedia));
                         await SendResponseAsync(resp, jsonResponse, 201, "application/json; charset=utf-8");
                     }
                     else if (method == "GET") // Reading
@@ -161,7 +161,7 @@ namespace Treasure_Bay.Controllers
                         string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
                         if (int.TryParse(idSegment, out int mediaID))
                         {
-                            var media = _mediaService.FindMedia(mediaID);
+                            MediaEntry? media = _mediaService.FindMedia(mediaID);
 
                             if (media == null)
                             {
@@ -172,7 +172,7 @@ namespace Treasure_Bay.Controllers
                             switch (method)
                             {
                                 case "GET":
-                                    string jsonResponse = JsonConvert.SerializeObject(media);
+                                    string jsonResponse = JsonConvert.SerializeObject(new MediaResponseDTO(media));
                                     await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
                                     break;
                                 case "DELETE": // Deletion
@@ -209,7 +209,7 @@ namespace Treasure_Bay.Controllers
                                     media.Description = mediaData.Description ?? media.Description;
                                     media.ReleaseYear = mediaData.ReleaseYear;
                                     _mediaService.UpdateMedia(media);
-                                    string updatedJsonResponse = JsonConvert.SerializeObject(media);
+                                    string updatedJsonResponse = JsonConvert.SerializeObject(new MediaResponseDTO(media));
                                     await SendResponseAsync(resp, updatedJsonResponse, 200, "application/json; charset=utf-8");
                                     break;
                                 default:
