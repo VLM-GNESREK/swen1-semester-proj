@@ -2,10 +2,10 @@
 	"info": {
 		"_postman_id": "c5d31087-7417-475a-abdf-6f2dc8da6814",
 		"name": "MRP Test Collection",
-		"description": "First perform the tests in the root folder. Then proceed with tests in the UserController folder. Lastly do the tests in the MediaController folder.",
+		"description": "First perform the tests in the root folder. Then proceed with tests in the UserController folder. Then the ones in the MediaController folder. Lastly do the tests in the RatingController folder.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "49375833",
-		"_collection_link": "https://vlm-gnesrek-1596437.postman.co/workspace/5e94f78d-43eb-407f-808c-e83e68bc5c27/collection/49375833-c5d31087-7417-475a-abdf-6f2dc8da6814?action=share&source=collection_link&creator=49375833"
+		"_collection_link": "https://vlm-gnesrek-1596437.postman.co/workspace/Vincent-L.'s-Workspace~5e94f78d-43eb-407f-808c-e83e68bc5c27/collection/49375833-c5d31087-7417-475a-abdf-6f2dc8da6814?action=share&source=collection_link&creator=49375833"
 	},
 	"item": [
 		{
@@ -286,7 +286,7 @@
 					"response": []
 				},
 				{
-					"name": "[U1] Auth-Check",
+					"name": "[U1] Profile",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -417,7 +417,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Title\": \"Tale of Dark Starlit Nights\",\r\n    \"Description\": \"A beautiful ballad over a young maiden who wanders through a world hulled in perpetual darkness under a starry sky.\",\r\n    \"ReleaseYear\": 2025\r\n}",
+							"raw": "{\r\n    \"Title\": \"Tale of Dark Starlit Nights\",\r\n    \"Description\": \"A beautiful ballad over a young maiden who wanders through a world hulled in perpetual darkness under a starry sky.\",\r\n    \"ReleaseYear\": 2025,\r\n    \"MediaType\": \"Movie\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -461,6 +461,34 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{baseURL}}/api/media",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] All Media Read",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{baseURL}}/api/media",
 							"host": [
@@ -589,20 +617,29 @@
 					"response": []
 				},
 				{
-					"name": "[F] Unauthorised Deletion",
+					"name": "[U1] Media Update",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "Noire Dante Xion-mrpToken",
+									"value": "Sadie de Aflor-mrpToken",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Title\": \"The Moonmaiden\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseURL}}/api/media/1",
 							"host": [
@@ -656,29 +693,20 @@
 					"response": []
 				},
 				{
-					"name": "[U1] Media Update",
+					"name": "[F] Unauthorised Deletion",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "Sadie de Aflor-mrpToken",
+									"value": "Noire Dante Xion-mrpToken",
 									"type": "string"
 								}
 							]
 						},
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"Title\": \"The Moonmaiden\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseURL}}/api/media/1",
 							"host": [
@@ -783,56 +811,439 @@
 			]
 		},
 		{
-			"name": "[F] Unauthorised Deletion",
+			"name": "RatingController Tests",
+			"item": [
+				{
+					"name": "[U1] Rating Creation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"media_id\": 1,\r\n    \"stars\": 4,\r\n    \"comment\": \" liked it a lot!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ratings",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] Rating Creation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"media_id\": 1,\r\n    \"stars\": 5,\r\n    \"comment\": \"An absolute masterpiece!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ratings",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Get All Ratings on Media",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ratings?mediaID=1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings"
+							],
+							"query": [
+								{
+									"key": "mediaID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Update Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stars\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ratings/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Delete Rating",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ratings/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Like Rating",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Remove Like Rating",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/ratings/like/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"like",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U2] Show Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Noire Dante Xion-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isVisible\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/ratings/visibility/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"ratings",
+								"visibility",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favourites & Profile Stats",
+			"item": [
+				{
+					"name": "[U1] Favourite Creation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"MediaID\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/favourites",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"favourites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[F] Duplicate Favourite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"MediaID\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/favourites",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"favourites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Get Favourites",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/favourites",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"favourites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Remove Favourite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/favourites/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"favourites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[U1] Get Leaderboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Sadie de Aflor-mrpToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/leaderboard?limit=5",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"leaderboard"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "[R] Reset Database",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "Noire Dante Xion-mrpToken",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/api/media/1",
+					"raw": "{{baseURL}}/api/admin/reset",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"api",
-						"media",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "[S] Test",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "Sadie de Aflor-mrpToken",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseURL}}/test",
-					"host": [
-						"{{baseURL}}"
-					],
-					"path": [
-						"test"
+						"admin",
+						"reset"
 					]
 				}
 			},
@@ -864,13 +1275,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "[R] Delete Database",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/admin/drop",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"drop"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
 		{
 			"key": "baseURL",
-			"value": "",
-			"type": "default"
+			"value": ""
 		}
 	]
 }

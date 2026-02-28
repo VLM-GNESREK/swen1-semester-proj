@@ -103,60 +103,8 @@ namespace Treasure_Bay.Controllers
                         await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
                     }
                     break;
-                case "/api/media/favourites":
-                    if(method == "GET")
-                    {
-                        List<MediaEntry> favMedia = _mediaService.GetFavouritesByUserID(user.UserID);
-                        List<MediaResponseDTO> safeList = favMedia.Select(m => new MediaResponseDTO(m)).ToList();
-                        string jsonResponse = JsonConvert.SerializeObject(safeList);
-                        await SendResponseAsync(resp, jsonResponse, 200, "application/json; charset=utf-8");
-                        break;
-                    }
-                    else
-                    {
-                        await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
-                        break;
-                    }
                 default:
-                    if(path.StartsWith("/api/media/favourites/"))
-                    {
-                        string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
-                        if (!int.TryParse(idSegment, out int mediaID))
-                        {
-                            await SendResponseAsync(resp, $"Error 400: Invalid media ID.", 400);
-                            break;
-                        }
-
-                        switch(method)
-                        {
-                            case "POST":
-                                try
-                                {
-                                    _mediaService.AddFavourite(user.UserID, mediaID);
-                                    await SendResponseAsync(resp, "", 204);
-                                }
-                                catch(KeyNotFoundException)
-                                {
-                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
-                                }
-                                break;
-                            case "DELETE":
-                                try
-                                {
-                                    _mediaService.RemoveFavourite(user.UserID, mediaID);
-                                    await SendResponseAsync(resp, "", 204);
-                                }
-                                catch(KeyNotFoundException)
-                                {
-                                    await SendResponseAsync(resp, $"Error 404: Media not found.", 404);
-                                }
-                                break;
-                            default:
-                                await SendResponseAsync(resp, $"Error 405: Method not allowed.", 405);
-                                break;
-                        }
-                    }
-                    else if (path.StartsWith("/api/media/"))
+                    if (path.StartsWith("/api/media/"))
                     {
                         string? idSegment = req.Url?.Segments.Last().TrimEnd('/');
                         if (int.TryParse(idSegment, out int mediaID))

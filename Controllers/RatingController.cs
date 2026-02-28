@@ -212,7 +212,7 @@ namespace Treasure_Bay.Controllers
 
                         switch(method)
                         {
-                            case "DELETE":
+                            case "DELETE": // Deletion
                                 try
                                 {
                                     _ratingService.DeleteRating(ratingID, user);
@@ -228,7 +228,7 @@ namespace Treasure_Bay.Controllers
                                 }
                                 break;
                             
-                            case "PUT":
+                            case "PUT":   // Updating
                                 using(var reader = new StreamReader(req.InputStream, req.ContentEncoding))
                                 {
                                     requestBody = await reader.ReadToEndAsync();

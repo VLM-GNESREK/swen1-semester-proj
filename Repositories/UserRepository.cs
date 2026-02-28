@@ -88,7 +88,7 @@ namespace Treasure_Bay.Repositories
             using(var conn = new NpgsqlConnection(DataBaseSetup.ConnectionString))
             {
                 conn.Open();
-                var sql = "INSERT INTO favourites (user_id, media_id) VALUES (@u, @m) ON CONFLICT DO NOTHING";
+                var sql = "INSERT INTO favourites (user_id, media_id) VALUES (@u, @m)";
 
                 using(var cmd = new NpgsqlCommand(sql, conn))
                 {

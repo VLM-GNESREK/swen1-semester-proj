@@ -12,8 +12,5 @@ namespace Treasure_Bay.Repositories
         List<MediaEntry> GetFilteredMedia(string? title, string? type, string? genre);
         void UpdateMedia(MediaEntry media);
         void DeleteMedia(int id);
-        void AddFavourite(int userID, int mediaID);
-        void RemoveFavourite(int userID, int mediaID);
-        List<MediaEntry> GetFavouritesByUserID(int userID);
     }
 }
